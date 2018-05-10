@@ -42,6 +42,15 @@ class LightingScene extends CGFscene
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
+		this.car = new MyCar(this);
+
+		this.clocktexture = new CGFappearance(this);
+    this.clocktexture.setAmbient(0.8,0.8,0.8,1);
+		this.clocktexture.setDiffuse(0.8,0.8,0.8,1);
+		this.clocktexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
+		this.clocktexture.setShininess(120);
+    this.clocktexture.loadTexture('../resources/images/lamp.jpg');
+
 
 		this.setUpdatePeriod(1000/FPS);
 
@@ -70,7 +79,7 @@ class LightingScene extends CGFscene
 
 	initLights()
 	{
-		this.setGlobalAmbientLight(0,0,0, 1.0);
+		this.setGlobalAmbientLight(1,1,1, 1.0);
 
 		// Positions for four lights
 		this.lights[0].setPosition(4.0, 6.0, 1.0, 1.0);
@@ -146,10 +155,10 @@ class LightingScene extends CGFscene
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
-
+/*
 		this.pushMatrix();
 			this.terrain.display();
-		this.popMatrix();
+		this.popMatrix();*/
 
 		// Plane Wall
 	/*	this.pushMatrix();
@@ -159,12 +168,30 @@ class LightingScene extends CGFscene
 			this.wall.display();
 		this.popMatrix();*/
 
-this.materialDefault.apply();
+/*this.materialDefault.apply();
 		//whell
 		this.pushMatrix();
 			this.translate(0, 1, 0);
 			this.chassis.display();
+		this.popMatrix();*/
+/*
+		this.pushMatrix();
+			this.scale(1.3,1.1,1);
+			this.translate(0, 1, 0);
+				this.clocktexture.apply();
+				this.trap.display();
 		this.popMatrix();
+		this.pushMatrix();
+			this.translate(0, 1, 0);
+				//this.clocktexture.apply();
+				this.chassis.display();
+		this.popMatrix();*/
+		this.car.display();
+
+		//this.chassis.display();
+
+
+		//this.cil.display();
 
 
 

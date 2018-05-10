@@ -19,6 +19,10 @@ serialInclude([
 	'MyWheel.js',
 	'MyAxis.js',
 	'MyChassis.js',
+	'MyTrapezoid.js',
+	'MyTriangularPrism.js',
+	'MyCar.js',
+	'MyTrapBase.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

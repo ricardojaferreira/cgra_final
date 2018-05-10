@@ -1,25 +1,23 @@
 class MyTriangle extends CGFobject{
-  constructor(scene)
+  constructor(scene,base,height)
   {
     super(scene);
 
-    //this.minS = minS;
-    //this.maxS = maxS;
-    //this.minT = minT;
-    //this.maxT = maxT;
+    this.base = base;
+    this.height = height;
     this.initBuffers();
   };
 
   initBuffers()
   {
-    this.vertices = [
-        -0.5, -0.5, 0,
-        0.5, -0.5, 0,
-        -0.5, 0.5, 0,
-        ];
+    this.vertices = [];
+    this.vertices.push(this.base,0,0);
+    this.vertices.push(0,this.height,0);
+    this.vertices.push(0,0,0);
 
     this.indices = [
         0, 1, 2,
+        0, 2, 1
       ];
 
     this.primitiveType=this.scene.gl.TRIANGLES;
@@ -29,12 +27,11 @@ class MyTriangle extends CGFobject{
           0, 0, 1,
         ];
 
-/*    this.texCoords = [
-      this.minS, this.maxT,
-      this.maxS, this.maxT,
-      this.minS, this.minT,
-      this.maxS, this.minT
-    ];*/
+    this.texCoords = [
+      1, 1,
+      0, 0,
+      0, 1
+    ];
 
     this.initGLBuffers();
   };

@@ -8,7 +8,7 @@ class MyAxis extends CGFobject{
   display(){
     //Axis
     this.scene.pushMatrix();
-      this.scene.scale(0.15, 0.15, 3.5);
+      this.scene.scale(0.15, 0.15, 1.5);
       this.axis.display();
     this.scene.popMatrix();
   }
