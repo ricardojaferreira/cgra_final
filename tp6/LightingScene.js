@@ -42,18 +42,29 @@ class LightingScene extends CGFscene
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
-		this.car = new MyCar(this);
+		this.car = new MyVehicle(this);
 
 		this.clocktexture = new CGFappearance(this);
     this.clocktexture.setAmbient(0.8,0.8,0.8,1);
 		this.clocktexture.setDiffuse(0.8,0.8,0.8,1);
-		this.clocktexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
+		this.clocktexture.setSpecular(0.1,0.1,0.1,1);
 		this.clocktexture.setShininess(120);
     this.clocktexture.loadTexture('../resources/images/lamp.jpg');
 
 
 		this.setUpdatePeriod(1000/FPS);
 
+		//Luzes
+		this.luz1 = true;
+		this.luz2 = true;
+		this.luz3 = true;
+		this.luz4 = true;
+
+		//Vehicle
+		this.luzes = false;
+
+		//options
+		this.showAxis=false;
 		this.option1=true;
 		this.option2=false;
 		this.speed=3;
@@ -116,10 +127,6 @@ class LightingScene extends CGFscene
 		this.lights[3].setLinearAttenuation(0);
 		this.lights[3].setQuadraticAttenuation(0.1);
 
-		this.lights[0].enable();
-		this.lights[1].enable();
-		this.lights[2].enable();
-		this.lights[3].enable();
 	};
 
 	updateLights()
@@ -131,6 +138,31 @@ class LightingScene extends CGFscene
 
 	display()
 	{
+
+		//check Lights
+		if(this.luz1){
+				this.lights[0].enable();
+		} else {
+			this.lights[0].disable();
+		}
+
+		if(this.luz2){
+				this.lights[1].enable();
+		} else {
+			this.lights[1].disable();
+		}
+
+		if(this.luz3){
+				this.lights[2].enable();
+		} else {
+			this.lights[2].disable();
+		}
+
+		if(this.luz4){
+				this.lights[3].enable();
+		} else {
+			this.lights[3].disable();
+		}
 		// ---- BEGIN Background, camera and axis setup
 
 		// Clear image and depth buffer everytime we update the scene
@@ -148,54 +180,26 @@ class LightingScene extends CGFscene
 		this.updateLights();
 
 		// Draw axis
-		this.axis.display();
+		if(this.showAxis){
+			this.axis.display();
+		}
+
 
 		this.materialDefault.apply();
 
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
-/*
+
 		this.pushMatrix();
 			this.terrain.display();
-		this.popMatrix();*/
-
-		// Plane Wall
-	/*	this.pushMatrix();
-			this.translate(7.5, 4, 0);
-			this.scale(15, 8, 0.2);
-			this.materialDefault.apply();
-			this.wall.display();
-		this.popMatrix();*/
-
-/*this.materialDefault.apply();
-		//whell
-		this.pushMatrix();
-			this.translate(0, 1, 0);
-			this.chassis.display();
-		this.popMatrix();*/
-/*
-		this.pushMatrix();
-			this.scale(1.3,1.1,1);
-			this.translate(0, 1, 0);
-				this.clocktexture.apply();
-				this.trap.display();
 		this.popMatrix();
+
 		this.pushMatrix();
-			this.translate(0, 1, 0);
-				//this.clocktexture.apply();
-				this.chassis.display();
-		this.popMatrix();*/
-		this.car.display();
-
-		//this.chassis.display();
-
-
-		//this.cil.display();
-
-
-
-
+			this.translate(0,1.3,0);
+			this.car.display();
+		this.popMatrix();
+		this.car.controlLights(this.luzes);
 
 		// ---- END Scene drawing section
 	};
