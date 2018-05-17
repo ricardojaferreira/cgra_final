@@ -17,10 +17,13 @@ serialInclude([
 	'MyTerrain.js',
 	'MyInterface.js',
 	'MyWheel.js',
+	'MyFrontWheels.js',
+	'MyBackWheels.js',
 	'MyAxis.js',
 	'MyChassis.js',
 	'MyTrapezoid.js',
 	'MyTriangularPrism.js',
+	'MyCar.js',
 	'MyVehicle.js',
 	'MyTrapBase.js',
 

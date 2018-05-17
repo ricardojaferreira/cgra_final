@@ -1,70 +1,48 @@
 //let degToRad = Math.PI / 180.0;
 
+var degToRad = Math.PI / 180.0;
+
 class MyChassis extends CGFobject{
   constructor(scene, slices, stacks)
   {
     super(scene);
-    this.flWheel = new MyWheel(scene, slices, stacks);
-    this.frWheel = new MyWheel(scene, slices, stacks);
-    this.blWheel = new MyWheel(scene, slices, stacks);
-    this.brWheel = new MyWheel(scene, slices, stacks);
+    this.frontWheels = new MyFrontWheels(scene, slices, stacks);
+    this.backWheels = new MyBackWheels(scene,slices,stacks);
 
-    this.fAxis = new MyAxis(scene,slices,stacks);
-    this.rAxis = new MyAxis(scene,slices,stacks);
+    this.wheelRotation = 0;
+    this.deltaRotation = 0;
 
-    this.axisTexture = new CGFappearance(scene);
-    this.axisTexture.setAmbient(0.8,0.8,0.8,1);
-		this.axisTexture.setDiffuse(0.8,0.8,0.8,1);
-		this.axisTexture.setSpecular(0.1,0.1,0.1,1);
-		this.axisTexture.setShininess(120);
-    this.axisTexture.loadTexture('../resources/images/metalTexture.jpg');
+  }
+
+  changeSpeed(vel){
+    this.deltaRotation = vel/10;
+  }
+
+  updateSteering(steering){
+    this.frontWheels.updateSteering(steering);
+  }
+
+  update(steering, velocity){
+    this.updateSteering(steering);
+    this.changeSpeed(velocity);
+    this.wheelRotation+=this.deltaRotation;
+    this.frontWheels.update(this.deltaRotation);
   }
 
   display(){
 
-    //Front Axis
+    //front wheels
     this.scene.pushMatrix();
-      this.scene.translate(0.95, -0.75, -0.75);
-      this.axisTexture.apply();
-      this.fAxis.display();
+      this.scene.translate(0.95, 0.0, 0);
+      this.frontWheels.display();
     this.scene.popMatrix();
 
-    //Rear Axis
+    //back wheels
     this.scene.pushMatrix();
-      this.scene.translate(-1.5, -0.75, -0.75);
-      this.axisTexture.apply();
-      this.rAxis.display();
+      this.scene.translate(-1.5, 0.0, 0);
+      this.scene.rotate(-this.wheelRotation, 0, 0, 1);
+      this.backWheels.display();
     this.scene.popMatrix();
-
-      //front left Wheel
-      this.scene.pushMatrix();
-        this.scene.translate(0.95,-0.75,0.7);
-        this.scene.scale(0.6,0.6,0.6);
-        this.flWheel.display();
-      this.scene.popMatrix();
-
-      //front right Wheel
-      this.scene.pushMatrix();
-        this.scene.translate(0.95,-0.75,-0.7);
-        this.scene.rotate(180*(Math.PI / 180), 0, 1, 0);
-        this.scene.scale(0.6,0.6,0.6);
-        this.frWheel.display();
-      this.scene.popMatrix();
-
-      //back left Wheel
-      this.scene.pushMatrix();
-        this.scene.translate(-1.5, -0.8, 0.7);
-        this.scene.scale(0.6,0.6,0.6);
-        this.blWheel.display();
-      this.scene.popMatrix();
-
-      //back right Wheel
-      this.scene.pushMatrix();
-        this.scene.translate(-1.5, -0.8, -0.7);
-        this.scene.rotate(180*(Math.PI / 180), 0, 1, 0);
-        this.scene.scale(0.6,0.6,0.6);
-        this.brWheel.display();
-      this.scene.popMatrix();
 
   }
 }

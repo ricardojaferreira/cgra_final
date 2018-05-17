@@ -31,18 +31,19 @@ class LightingScene extends CGFscene
 		this.gl.enable(this.gl.CULL_FACE);
 		this.gl.depthFunc(this.gl.LEQUAL);
 
+		//Axis
 		this.axis = new CGFaxis(this);
-
-		// Scene elements
-		this.terrain = new MyTerrain(this);
-
-		//Wheel
-		this.chassis = new MyChassis(this,16,20);
 
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
-		this.car = new MyVehicle(this);
+		// Terrain elements
+		this.terrain = new MyTerrain(this);
+
+		//Vehicle
+		this.vehicle = new MyVehicle(this);
+
+		this.wheel = new MyChassis(this, 16, 20);
 
 		this.clocktexture = new CGFappearance(this);
     this.clocktexture.setAmbient(0.8,0.8,0.8,1);
@@ -64,10 +65,17 @@ class LightingScene extends CGFscene
 		this.luzes = false;
 
 		//options
-		this.showAxis=false;
+		this.showAxis=true;
 		this.option1=true;
 		this.option2=false;
-		this.speed=3;
+		this.speed=0;
+		this.steering = 0;
+		this.compensateDirection = false;
+
+		this.keyAPressed = false;
+		this.keyDPressed = false;
+		this.keyWPressed = false;
+		this.keySPressed = false;
 
 	};
 
@@ -75,12 +83,95 @@ class LightingScene extends CGFscene
 		console.log("Doing something...");
 	}
 
+	checkKeys() {
+		if (this.gui.isKeyPressed("KeyW"))
+		{
+			if(this.speed<5){
+					this.speed+=0.5;
+			}
+			//console.log(this.speed);
+			//this.vehicle.moveForward();
+		}
+
+		if (this.gui.isKeyPressed("KeyS"))
+		{
+			if(this.speed>-5){
+				this.speed+=-0.5;
+			}
+			//this.vehicle.moveBackward();
+		}
+
+		if (this.gui.isKeyPressed("KeyZ"))
+		{
+			this.speed = 0;
+			//console.log(this.speed);
+			//this.vehicle.moveForward();
+		}
+
+		//move left
+		if (this.gui.isKeyPressed("KeyA"))
+		{
+			this.compensateDirection=false;
+			if(this.steering<35){
+					this.steering+=5;
+			}
+			//this.steering*=degToRad;
+			//this.wheel.updateSteering(this.steering*degToRad);
+			//console.log(this.steering*degToRad);
+			//this.vehicle.moveForward();
+			console.log("KeyA pressed");
+			this.keyAPressed=true;
+		}
+
+		if(this.keyAPressed && !this.gui.isKeyPressed("KeyA")){
+			this.keyAPressed = false;
+			this.compensateDirection=true;
+				//console.log("KeyA Released");
+		}
+
+
+
+		//move left
+		if (this.gui.isKeyPressed("KeyD"))
+		{
+			this.compensateDirection=false;
+			if(this.steering>-35){
+					this.steering-=5;
+			}
+			//this.wheel.updateSteering(this.steering*degToRad);
+			//console.log(this.steering*degToRad);
+			//this.vehicle.moveForward();
+			console.log("KeyD pressed");
+			this.keyDPressed=true;
+		}
+
+		if(this.keyDPressed && !this.gui.isKeyPressed("KeyD")){
+			this.keyDPressed = false;
+			this.compensateDirection=true;
+			//console.log("KeyD Released");
+		}
+
+	}
+
 	update(currTime){
-		this.lastTime = this.lastTime || 0;
+		this.checkKeys();
 
-		this.deltaTime = currTime - this.lastTime;
-		this.lastTime = currTime;
+		if(this.steering == 0){
+			this.compensateDirection=false;
+		}
 
+		if(this.compensateDirection){
+			if(this.steering>0){
+				this.steering-=5;
+			} else {
+				this.steering+=5;
+			}
+		}
+
+		/**
+		*@param this.steeringXdegToRad - update steering direction
+		*/
+		this.vehicle.update(this.steering*degToRad, this.speed);
 	}
 
 	initCameras()
@@ -191,15 +282,15 @@ class LightingScene extends CGFscene
 
 		// ---- BEGIN Scene drawing section
 
+		//this.pos-=0.1;
 		this.pushMatrix();
-			this.terrain.display();
+			//this.terrain.display();
 		this.popMatrix();
 
 		this.pushMatrix();
-			this.translate(0,1.3,0);
-			this.car.display();
+			this.vehicle.display();
 		this.popMatrix();
-		this.car.controlLights(this.luzes);
+		this.vehicle.controlLights(this.luzes);
 
 		// ---- END Scene drawing section
 	};

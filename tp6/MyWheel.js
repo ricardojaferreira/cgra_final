@@ -36,19 +36,21 @@ class MyWheel extends CGFobject{
   display(){
     //Wheel
     this.scene.pushMatrix();
+      this.scene.translate(0,0,-0.5)
       this.wheelTexture.apply();
       this.cylinder.display();
     this.scene.popMatrix();
 
     //Rim
     this.scene.pushMatrix();
-      this.scene.translate(0, 0, 1);
+      this.scene.translate(0, 0, 0.5);
       this.rimTexture.apply();
       this.rim.display();
     this.scene.popMatrix();
 
     //Interior
     this.scene.pushMatrix();
+      this.scene.translate(0, 0, -0.5);
       this.scene.rotate(180*(Math.PI / 180), 0, 1, 0);
       this.interiorTexture.apply();
       this.interior.display();
