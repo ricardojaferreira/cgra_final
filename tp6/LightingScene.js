@@ -36,7 +36,7 @@ class LightingScene extends CGFscene
 		this.vehicle = new MyVehicle(this);
 
 		this.wheel = new MyChassis(this, 16, 20);
-		
+
 		//Crane
 		this.crane = new MyCrane(this);
 		this.forceCrane = false;
@@ -82,7 +82,7 @@ class LightingScene extends CGFscene
 	doSomething(){
 		console.log("Doing something...");
 	}
-	
+
 	setTextureDropDown(){
 		this.text1 = new CGFappearance(this);
     this.text1.setAmbient(0.8,0.8,0.8,1);
@@ -164,18 +164,18 @@ class LightingScene extends CGFscene
 		let index = this.vehicleAppearecesList.get(this.Texture);
 		if(index!=this.currVehicleAppearance){
 			this.currVehicleAppearance = index;
-			this.car.updateTexture(this.vehicleAppearances[index]);
+			this.vehicle.updateCarTexture(this.vehicleAppearances[index]);
 		}
 
 		//Update crane angle
 		if(this.forceCrane){
 			this.crane.update(this.deltaTime);
-			if(this.crane.getCurrentState==7){
+			if(this.crane.getCurrentState()==7){
 				this.forceCrane = false;
 				this.crane.setState(0);
 			}
 		}
-		
+
 		//Update car
 		this.checkKeys();
 
@@ -310,7 +310,7 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 			//this.terrain.display();
 		this.popMatrix();
-		
+
 		if(!this.crane.shouldDisplayCar()){
 			this.pushMatrix();
 				//this.translate(0,1.35,0);
@@ -318,9 +318,9 @@ class LightingScene extends CGFscene
 			this.popMatrix();
 			this.vehicle.controlLights(this.luzes);
 		}
-		
+
 		this.materialDefault.apply();
-		this.crane.display(this.car, this.chassis);
+		this.crane.display(this.vehicle);
 
 		// ---- END Scene drawing section
 	};

@@ -13,7 +13,7 @@ class MyMagnetToJointUnit extends CGFobject{
     this.length = 4;
   }
 
-  display(jointAngle,car,chassis,displayCar){
+  display(jointAngle,vehicle,displayCar){
 
     //JOINT
     this.scene.pushMatrix();
@@ -64,10 +64,10 @@ class MyMagnetToJointUnit extends CGFobject{
           this.magnetAndCable.display();
 
           if(displayCar){
-          this.scene.pushMatrix();
-            this.scene.translate(0,-1.3,0);
-            car.display();
-          this.scene.popMatrix();
+            this.scene.pushMatrix();
+              this.scene.translate(0,-1.3,0);
+              vehicle.display();
+            this.scene.popMatrix();
           }
     this.scene.popMatrix();
   }

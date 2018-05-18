@@ -37,6 +37,10 @@ class MyVehicle extends CGFobject{
 
   };
 
+  updateCarTexture(texture){
+    this.car.updateTexture(texture);
+  }
+
   lights(onoff){
     if(onoff){
       this.scene.lights[5].enable();

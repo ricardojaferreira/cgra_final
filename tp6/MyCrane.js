@@ -76,11 +76,11 @@ class MyCrane extends CGFobject{
       this.state = nextState;
   }
 
-  display(car, chassis){
+  display(vehicle){
     //MyBaseToJointUnit
     this.scene.pushMatrix();
         this.scene.rotate(this.baseAngle*Math.PI/180,0,1,0);
-        this.baseToJointUnit.display(car, chassis, this.shouldDisplayCar());
+        this.baseToJointUnit.display(vehicle, this.shouldDisplayCar());
     this.scene.popMatrix();
   }
 
