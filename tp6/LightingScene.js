@@ -120,6 +120,10 @@ class LightingScene extends CGFscene
 			this.compensateDirection=true;
 		}
 
+		if (this.gui.isKeyPressed("KeyZ")){
+			this.speed=0;
+		}
+
 }
 
 	update(currTime){
