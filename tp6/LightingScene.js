@@ -168,7 +168,12 @@ class LightingScene extends CGFscene
 		}
 
 		//Update crane angle
-		if(this.forceCrane){
+		let xDif =  Math.abs(this.vehicle.getXPos() - this.crane.getRXPosition());
+		console.log("xDif" + xDif);
+		let zDif =  Math.abs(this.vehicle.getZPos() - this.crane.getRZPosition());
+		console.log("zDif" + zDif);
+		console.log("Value -> " + (xDif<2 && zDif<2 && this.speed==0));
+		if(this.forceCrane || (xDif<2 && zDif<2 && this.speed==0)){
 			this.crane.update(this.deltaTime);
 			if(this.crane.getCurrentState()==6){
 				this.forceCrane = false;

@@ -12,6 +12,9 @@ class MyCrane extends CGFobject{
     this.holdPositionTimer = 0;
     this.HoldTime = 2;
 
+    this.RXPosition = 0;
+    this.RZPosition = (10+4)*Math.cos(45*Math.PI/180);
+
     this.state = 0;
   }
 
@@ -94,6 +97,14 @@ class MyCrane extends CGFobject{
 
   shouldDisplayCar(){
     return (this.state>1 && this.state<5);
+  }
+
+  getRXPosition(){
+    return this.RXPosition;
+  }
+
+  getRZPosition(){
+    return this.RZPosition;
   }
 
 }

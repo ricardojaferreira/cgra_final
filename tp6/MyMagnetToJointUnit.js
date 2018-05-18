@@ -65,7 +65,7 @@ class MyMagnetToJointUnit extends CGFobject{
 
           if(displayCar){
             this.scene.pushMatrix();
-              this.scene.translate(0,-1.3,0);
+              this.scene.translate(vehicle.getXPos(),-1.3,vehicle.getZPos());
               vehicle.display();
             this.scene.popMatrix();
           }
