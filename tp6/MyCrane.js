@@ -25,37 +25,37 @@ class MyCrane extends CGFobject{
       return;
 
     this.animationSpeed = deltaTime/(1000/5);
-
-    if(this.state == 0){
-      this.gotoMaxJointAngle(deltaTime, 1)
-    }
-    else if(this.state == 1){
-      this.holdPositionTimer += this.animationSpeed;
-      if(this.holdPositionTimer>this.HoldTime)
-        this.state = 2;
-    }
-    else if(this.state == 2){
-      this.gotoMinJointAngle(deltaTime, 3);
-    }
-    else if(this.state == 3){
+    if(this.state==0){
       let angle = this.baseAngle + this.animationSpeed*(360/60);
       if(angle<this.baseMaxAngle)
         this.baseAngle = angle;
       else
-        this.state = 4;
+        this.state = 1;
+    }
+    else if(this.state==1){
+      this.gotoMaxJointAngle(deltaTime, 2);
+    }
+    else if(this.state == 2){
+      this.holdPositionTimer += this.animationSpeed;
+      if(this.holdPositionTimer>this.HoldTime){
+        this.state = 3;
+        this.holdPositionTimer = 0;
+      }
+    }
+    else if(this.state == 3){
+      this.gotoMinJointAngle(deltaTime, 4);
     }
     else if(this.state == 4){
-      this.gotoMaxJointAngle(deltaTime, 5)
-    }
-    else if(this.state == 5){
-      this.gotoMinJointAngle(deltaTime, 6);
-    }
-    else if(this.state == 6){
       let angle = this.baseAngle - this.animationSpeed*(360/60);
       if(angle>this.baseMinAngle)
         this.baseAngle = angle;
       else
-        this.state = 7;
+        this.state = 5;
+    }
+    else if(this.state == 5){ //LARGAR CARRO
+      this.holdPositionTimer += this.animationSpeed;
+      if(this.holdPositionTimer>this.HoldTime)
+        this.state = 6;
     }
 
   }
