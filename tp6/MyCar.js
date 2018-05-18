@@ -10,26 +10,6 @@ class MyCar extends CGFobject{
 		this.rearWindow = new MyTriangularPrism(scene,1,1,1);
     this.chassis = new MyChassis(scene,16,20);
 
-    //lights
-    scene.lights[5].setPosition(2.3, 1.3, 0.8, 1.0);
-    //scene.lights[5].setVisible(true);
-    scene.lights[5].setSpecular(1.0,1.0,1.0,1.0);
-    scene.lights[5].setAmbient(0, 0, 0, 1.0);
-    scene.lights[5].setDiffuse(1.0, 1.0, 1.0, 1.0);
-    scene.lights[5].setConstantAttenuation(1.0);
-    scene.lights[5].setLinearAttenuation(0);
-    scene.lights[5].setQuadraticAttenuation(0);
-
-    //lights
-    scene.lights[6].setPosition(2.3, 1.3, -0.8, 1.0);
-    //scene.lights[6].setVisible(true);
-    scene.lights[6].setSpecular(1.0,1.0,1.0,1.0);
-    scene.lights[6].setAmbient(0, 0, 0, 1.0);
-    scene.lights[6].setDiffuse(1.0, 1.0, 1.0, 1.0);
-    scene.lights[6].setConstantAttenuation(1.0);
-    scene.lights[6].setLinearAttenuation(0);
-    scene.lights[6].setQuadraticAttenuation(0);
-
     this.prismBaseFW = new MyTriangle(scene,0.5,1);
     this.prismBaseRW = new MyTriangle(scene,1,1);
     this.wheelSocketBase = new MyTrapBase(scene,6,1);
@@ -64,22 +44,10 @@ class MyCar extends CGFobject{
 		this.paraChoquesTexture.setShininess(120);
     this.paraChoquesTexture.loadTexture('../resources/images/parachoque.jpg');
 
-    this.myScene = scene;
-
   };
 
-  update(steering, velocity){
-    this.chassis.update(steering, velocity);
-  }
-
-  lights(onoff){
-    if(onoff){
-      this.myScene.lights[5].enable();
-      this.myScene.lights[6].enable();
-    } else {
-      this.myScene.lights[5].disable();
-      this.myScene.lights[6].disable();
-    }
+  update(speed, steering){
+    this.chassis.update(steering, speed);
   }
 
   display(){
