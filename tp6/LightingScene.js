@@ -36,6 +36,11 @@ class LightingScene extends CGFscene
 		this.vehicle = new MyVehicle(this);
 
 		this.wheel = new MyChassis(this, 16, 20);
+		
+		//Crane
+		this.crane = new MyCrane(this);
+		this.forceCrane = false;
+		this.setTextureDropDown();
 
 		this.clocktexture = new CGFappearance(this);
     this.clocktexture.setAmbient(0.8,0.8,0.8,1);
@@ -76,6 +81,30 @@ class LightingScene extends CGFscene
 
 	doSomething(){
 		console.log("Doing something...");
+	}
+	
+	setTextureDropDown(){
+		this.text1 = new CGFappearance(this);
+    this.text1.setAmbient(0.8,0.8,0.8,1);
+		this.text1.setDiffuse(0.8,0.8,0.8,1);
+		this.text1.setSpecular(0.1,0.1,0.1,1);
+		this.text1.setShininess(120);
+    this.text1.loadTexture('../resources/images/redbull.jpg');
+
+		this.text2 = new CGFappearance(this);
+    this.text2.setAmbient(0.8,0.8,0.8,1);
+		this.text2.setDiffuse(0.8,0.8,0.8,1);
+		this.text2.setSpecular(0.1,0.1,0.1,1);
+		this.text2.setShininess(120);
+    this.text2.loadTexture('../resources/images/dakar.jpg');
+
+		this.vehicleAppearances = [this.text1, this.text2];
+		this.vehicleAppearecesList = new Map();
+		this.vehicleAppearecesList.set("redbull", 0);
+		this.vehicleAppearecesList.set("dakar", 1);
+
+		this.Texture = "redbull";
+		this.currVehicleAppearance = this.vehicleAppearecesList.get(this.Texture);
 	}
 
 	checkKeys() {
@@ -127,6 +156,27 @@ class LightingScene extends CGFscene
 }
 
 	update(currTime){
+		this.lastTime = this.lastTime || 0;
+
+		this.deltaTime = currTime - this.lastTime;
+		this.lastTime = currTime;
+		//Update texture car
+		let index = this.vehicleAppearecesList.get(this.Texture);
+		if(index!=this.currVehicleAppearance){
+			this.currVehicleAppearance = index;
+			this.car.updateTexture(this.vehicleAppearances[index]);
+		}
+
+		//Update crane angle
+		if(this.forceCrane){
+			this.crane.update(this.deltaTime);
+			if(this.crane.getCurrentState==7){
+				this.forceCrane = false;
+				this.crane.setState(0);
+			}
+		}
+		
+		//Update car
 		this.checkKeys();
 
 		if(this.rotation == 0){
@@ -260,12 +310,17 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 			//this.terrain.display();
 		this.popMatrix();
-
-		this.pushMatrix();
-			//this.translate(0,1.35,0);
-			this.vehicle.display();
-		this.popMatrix();
-		this.vehicle.controlLights(this.luzes);
+		
+		if(!this.crane.shouldDisplayCar()){
+			this.pushMatrix();
+				//this.translate(0,1.35,0);
+				this.vehicle.display();
+			this.popMatrix();
+			this.vehicle.controlLights(this.luzes);
+		}
+		
+		this.materialDefault.apply();
+		this.crane.display(this.car, this.chassis);
 
 		// ---- END Scene drawing section
 	};
