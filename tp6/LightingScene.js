@@ -170,7 +170,7 @@ class LightingScene extends CGFscene
 		//Update crane angle
 		if(this.forceCrane){
 			this.crane.update(this.deltaTime);
-			if(this.crane.getCurrentState()==7){
+			if(this.crane.getCurrentState()==6){
 				this.forceCrane = false;
 				this.crane.setState(0);
 			}
