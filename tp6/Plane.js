@@ -2,7 +2,7 @@
 /** Represents a plane with nrDivs divisions along both axis, with center at (0,0) */
 class Plane extends CGFobject{
 
-	constructor(scene, nrDivs)
+	constructor(scene, nrDivs, altimetry)
 	{
 		super(scene);
 

@@ -1,11 +1,9 @@
 class MyTerrain extends CGFobject{
 
-  //var TERRAIN_DIVISIONS = 100;
-
-  constructor(scene)
+  constructor(scene, nrDivs, altimetry)
   {
     super(scene);
-    this.plane = new Plane(scene, 100);
+    this.plane = new Plane(scene, nrDivs, altimetry);
 
 
 		// Terrain Texture

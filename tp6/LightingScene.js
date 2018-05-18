@@ -1,4 +1,5 @@
 var FPS = 100;
+var TERRAIN_DIVISIONS = 100;
 
 class LightingScene extends CGFscene
 {
@@ -29,8 +30,21 @@ class LightingScene extends CGFscene
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
+		//altimetry
+		this.altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0 ],
+											[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 0.0 ],
+											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+											[ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0 ],
+											[ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0 ],
+											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+											[ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0 ]
+										];
+
+										console.log()
 		// Terrain elements
-		this.terrain = new MyTerrain(this);
+		this.terrain = new MyTerrain(this, this.altimetry.length+1, this.altimetry);
 
 		//Vehicle
 		this.vehicle = new MyVehicle(this);
@@ -258,11 +272,11 @@ class LightingScene extends CGFscene
 
 		//this.pos-=0.1;
 		this.pushMatrix();
-			//this.terrain.display();
+			this.terrain.display();
 		this.popMatrix();
 
 		this.pushMatrix();
-			//this.translate(0,1.35,0);
+			this.translate(0,1.35,0);
 			this.vehicle.display();
 		this.popMatrix();
 		this.vehicle.controlLights(this.luzes);
