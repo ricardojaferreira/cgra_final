@@ -25,6 +25,10 @@ serialInclude([
 	'MyCar.js',
 	'MyVehicle.js',
 	'MyTrapBase.js',
+	'MyCrane.js',
+	'MyMagnetAndCable.js',
+	'MyMagnetToJointUnit.js',
+	'MyBaseToJointUnit.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
