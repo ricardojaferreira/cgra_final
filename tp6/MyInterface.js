@@ -38,13 +38,17 @@ class MyInterface extends CGFinterface {
     lights.add(this.scene, 'luz2');
     lights.add(this.scene, 'luz3');
     lights.add(this.scene, 'luz4');
+		
+    this.gui.add(this.scene, 'forceCrane');
 
     //vehicle options
     var vehicle = this.gui.addFolder('Vehicle');
     vehicle.open();
     vehicle.add(this.scene, 'luzes');
+		vehicle.add(this.scene, 'Texture', ["redbull", "dakar"] );
 
 		// add a group of controls (and open/expand by defult)
+	
 
 		var group=this.gui.addFolder("Options");
 		group.open();

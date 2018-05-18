@@ -45,6 +45,10 @@ class MyCar extends CGFobject{
     this.paraChoquesTexture.loadTexture('../resources/images/parachoque.jpg');
 
   };
+	
+  updateTexture(texture){
+    this.roofTexture = texture;
+  }
 
   update(speed, steering){
     this.chassis.update(steering, speed);
@@ -219,7 +223,7 @@ class MyCar extends CGFobject{
       this.scene.translate(2,0,0.75);
       this.scene.rotate(90*Math.PI/180,0,1,0);
       this.scene.scale(0.25, 0.25, 0.25);
-        this.scene.clocktexture.apply();
+        this.lampTexture.apply();
         this.lamp.display();
     this.scene.popMatrix();
 
@@ -228,7 +232,7 @@ class MyCar extends CGFobject{
       this.scene.translate(2,0,-0.75);
       this.scene.rotate(90*Math.PI/180,0,1,0);
       this.scene.scale(0.25, 0.25, 0.25);
-        this.scene.clocktexture.apply();
+        this.lampTexture.apply();
         this.lamp.display();
     this.scene.popMatrix();
 
