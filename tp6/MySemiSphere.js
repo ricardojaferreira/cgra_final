@@ -13,17 +13,20 @@ class MySemiSphere extends CGFobject
 
     this.normals.push(Math.cos(0),Math.sin(0),0);
     this.vertices.push(c2*Math.cos(ang*Math.PI/180),c2*Math.sin(ang*Math.PI/180),z);
-    this.texCoords.push(0,z);
+    //this.texCoords.push(0,z);
+    this.texCoords.push((c2*Math.cos(ang*Math.PI/180)+1)/2,1-(c2*Math.sin(ang*Math.PI/180)+1)/2);
     for(let i=1;i<this.slices;i++){
       ang+=360/this.slices;
       this.vertices.push(c2*Math.cos(ang*Math.PI/180),c2*Math.sin(ang*Math.PI/180),z);
       this.normals.push(Math.cos(ang*Math.PI/180),Math.sin(ang*Math.PI/180),0);
-      this.texCoords.push(i*(1/this.slices),z);
+      this.texCoords.push((c2*Math.cos(ang*Math.PI/180)+1)/2,1-(c2*Math.sin(ang*Math.PI/180)+1)/2);
+      //this.texCoords.push(i*(1/this.slices),z);
 
     }
     this.vertices.push(c2*Math.cos(0),c2*Math.sin(0),z);
     this.normals.push(Math.cos(0),Math.sin(0),0);
-    this.texCoords.push(1,z);
+    this.texCoords.push((c2*Math.cos(0*Math.PI/180)+1)/2,1-(c2*Math.sin(0*Math.PI/180)+1)/2);
+    //this.texCoords.push(1,z);
   };
 
 	initBuffers()
