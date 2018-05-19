@@ -52,7 +52,7 @@ class MyTrapBase extends CGFobject{
         ];
       }
 
-      console.log(this.vertices);
+      //console.log(this.vertices);
 
 
 

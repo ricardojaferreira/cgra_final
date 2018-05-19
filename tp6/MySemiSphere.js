@@ -38,7 +38,7 @@ class MySemiSphere extends CGFobject
 
     c1 = 1 - 1/this.stacks;
     c2 = Math.sqrt(Math.pow(h,2)-Math.pow(c1,2))
-    console.log("C2-4:"+c2);
+    //console.log("C2-4:"+c2);
 
     this.placeVertexAndNormals(1,0.01);
 
@@ -48,8 +48,8 @@ class MySemiSphere extends CGFobject
       let z = 1-(j+1)/this.stacks;
       c1 = z;
       c2 = Math.sqrt(Math.pow(h,2)-Math.pow(c1,2));
-      console.log("C1-"+(4-j)+":"+c1);
-      console.log("C2-"+(4-j)+":"+c2);
+      //console.log("C1-"+(4-j)+":"+c1);
+      //console.log("C2-"+(4-j)+":"+c2);
       this.placeVertexAndNormals(z,c2);
       for(let i=0; i<this.slices ; i++){
         this.indices.push(index,index+this.slices+1,index+1)

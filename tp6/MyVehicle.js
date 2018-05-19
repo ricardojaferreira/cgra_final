@@ -55,6 +55,14 @@ class MyVehicle extends CGFobject{
     this.lights(onoff);
   }
 
+  getXpos(){
+    return this.xPos;
+  }
+
+  getZpos(){
+    return this.zPos;
+  }
+
   update(speed, steering, rotation){
 
     this.car.update(speed*10, rotation*degToRad);

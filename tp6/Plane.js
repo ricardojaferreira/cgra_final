@@ -11,6 +11,7 @@ class Plane extends CGFobject{
 
 		this.nrDivs = nrDivs;
 		this.patchLength = 1.0 / nrDivs;
+		this.altimetry = altimetry;
 
 		this.initBuffers();
 	};
@@ -47,12 +48,12 @@ class Plane extends CGFobject{
 			var xCoord = -0.5;
 			for (var i = 0; i <= this.nrDivs; i++)
 			{
-				this.vertices.push(xCoord, yCoord, 0);
+				this.vertices.push(xCoord, yCoord, this.altimetry[j][i]);
 
 				// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
 				// So all the vertices will have the same normal, (0, 0, 1).
 
-				this.normals.push(0,0,1);
+				this.normals.push(0,0,this.altimetry[j][i]);
 
 				// texCoords should be computed here; uncomment and fill the blanks
 				this.texCoords.push(xCoord+0.5, -yCoord+0.5);
@@ -61,6 +62,8 @@ class Plane extends CGFobject{
 			}
 			yCoord -= this.patchLength;
 		}
+
+		console.log("Vertices coord: " + this.vertices);
 
 		// Generating indices
 		/* for nrDivs = 3 output will be
@@ -94,6 +97,8 @@ class Plane extends CGFobject{
 				this.indices.push(ind);
 			}
 		}
+
+        console.log("Indices coord: " + this.indices);
 
 		this.primitiveType = this.scene.gl.TRIANGLE_STRIP;
 

@@ -31,38 +31,43 @@ class LightingScene extends CGFscene
 		this.materialDefault = new CGFappearance(this);
 
 		//altimetry
-		this.altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0 ],
-											[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 0.0 ],
-											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-											[ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0 ],
-											[ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0 ],
-											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-											[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-											[ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0 ]
-										];
+		/*this.altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0 ],
+						 [ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 0.0 ],
+						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						 [ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0 ],
+ 						 [ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0 ],
+						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						 [ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0 ]
+						];*/
 
-										console.log()
+
+						//	   0	   1	 2    3    4    5    6    7    7
+        this.altimetry= [ 	[ 12.0 , 12.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//0
+            				[ 18.0 , 18.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//1
+            				[ 32.0 , 32.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//2
+            				[ 32.0 , 32.0 , 0.0, 0.0, 12.0, 12.0, 0.0, 0.0, 32.0 ],//3
+            				[ 24.0 , 24.0 , 0.0, 0.0, 18.0, 18.0, 0.0, 0.0, 18.0 ],//4
+            				[ 18.0 , 18.0 , 0.0, 0.0, 24.0, 24.0, 0.0, 0.0, 18.0 ],//5
+            				[ 12.0 , 12.0 , 0.0, 0.0, 18.0, 18.0, 0.0, 0.0, 12.0 ],//6
+            				[ 18.0 , 18.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//7
+            				[ 12.0 , 12.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ] //8
+        				];
+
+
 		// Terrain elements
-		this.terrain = new MyTerrain(this, this.altimetry.length+1, this.altimetry);
+        let altSize = this.altimetry.length;
+		this.terrain = new MyTerrain(this, altSize-1, this.altimetry);
+
 
 		//Vehicle
 		this.vehicle = new MyVehicle(this);
-
-		this.wheel = new MyChassis(this, 16, 20);
 
 		//Crane
 		this.crane = new MyCrane(this);
 		this.forceCrane = false;
 		this.setTextureDropDown();
-
-		this.clocktexture = new CGFappearance(this);
-    this.clocktexture.setAmbient(0.8,0.8,0.8,1);
-		this.clocktexture.setDiffuse(0.8,0.8,0.8,1);
-		this.clocktexture.setSpecular(0.1,0.1,0.1,1);
-		this.clocktexture.setShininess(120);
-    this.clocktexture.loadTexture('../resources/images/lamp.jpg');
-
 
 		this.setUpdatePeriod(1000/FPS);
 
@@ -99,18 +104,18 @@ class LightingScene extends CGFscene
 
 	setTextureDropDown(){
 		this.text1 = new CGFappearance(this);
-    this.text1.setAmbient(0.8,0.8,0.8,1);
+    	this.text1.setAmbient(0.8,0.8,0.8,1);
 		this.text1.setDiffuse(0.8,0.8,0.8,1);
 		this.text1.setSpecular(0.1,0.1,0.1,1);
 		this.text1.setShininess(120);
-    this.text1.loadTexture('../resources/images/redbull.jpg');
+    	this.text1.loadTexture('../resources/images/redbull.jpg');
 
 		this.text2 = new CGFappearance(this);
-    this.text2.setAmbient(0.8,0.8,0.8,1);
+    	this.text2.setAmbient(0.8,0.8,0.8,1);
 		this.text2.setDiffuse(0.8,0.8,0.8,1);
 		this.text2.setSpecular(0.1,0.1,0.1,1);
 		this.text2.setShininess(120);
-    this.text2.loadTexture('../resources/images/dakar.jpg');
+    	this.text2.loadTexture('../resources/images/dakar.jpg');
 
 		this.vehicleAppearances = [this.text1, this.text2];
 		this.vehicleAppearecesList = new Map();
@@ -131,7 +136,6 @@ class LightingScene extends CGFscene
 		{
 				if(this.speed>-1)
 					this.speed-=0.01;
-				//this.move=-1;
 		}
 		if (this.gui.isKeyPressed("KeyA"))
 		{
@@ -182,11 +186,11 @@ class LightingScene extends CGFscene
 		}
 
 		//Update crane angle
-		let xDif =  Math.abs(this.vehicle.getXPos() - this.crane.getRXPosition());
-		console.log("xDif" + xDif);
-		let zDif =  Math.abs(this.vehicle.getZPos() - this.crane.getRZPosition());
-		console.log("zDif" + zDif);
-		console.log("Value -> " + (xDif<2 && zDif<2 && this.speed==0));
+		let xDif =  Math.abs(this.vehicle.getXpos() - this.crane.getRXPosition());
+		//console.log("xDif" + xDif);
+		let zDif =  Math.abs(this.vehicle.getZpos() - this.crane.getRZPosition());
+		//console.log("zDif" + zDif);
+		//console.log("Value -> " + (xDif<2 && zDif<2 && this.speed==0));
 		if(this.forceCrane || (xDif<2 && zDif<2 && this.speed==0)){
 			this.crane.update(this.deltaTime);
 			if(this.crane.getCurrentState()==6){
@@ -330,24 +334,30 @@ class LightingScene extends CGFscene
 			this.terrain.display();
 		this.popMatrix();
 
-<<<<<<< HEAD
 		this.pushMatrix();
-			this.translate(0,1.35,0);
+         	this.translate(15,1.35,15);
+         	this.rotate(90*degToRad,0,1,0);
 			this.vehicle.display();
 		this.popMatrix();
 		this.vehicle.controlLights(this.luzes);
-=======
-		if(!this.crane.shouldDisplayCar()){
-			this.pushMatrix();
-				//this.translate(0,1.35,0);
-				this.vehicle.display();
-			this.popMatrix();
-			this.vehicle.controlLights(this.luzes);
-		}
 
-		this.materialDefault.apply();
-		this.crane.display(this.vehicle);
->>>>>>> 6d5a76941382b975ebfbdd92a0e022e3bd10efb6
+        // if(!this.crane.shouldDisplayCar()){
+			// this.pushMatrix();
+			// 	this.translate(15,1.35,15);
+			// 	this.rotate(90*degToRad,0,1,0);
+			// 	this.vehicle.display();
+			// this.popMatrix();
+			// this.vehicle.controlLights(this.luzes);
+        // }
+        //
+        // this.pushMatrix();
+			// this.materialDefault.apply();
+			// this.translate(5,0,-22);
+        // 	this.rotate(-90*degToRad,0,1,0);
+			// this.crane.display(this.vehicle);
+        // this.popMatrix();
+
+
 
 		// ---- END Scene drawing section
 	};
