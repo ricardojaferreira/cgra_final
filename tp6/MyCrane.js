@@ -1,6 +1,11 @@
 class MyCrane extends CGFobject{
-  constructor(scene){
+  constructor(scene, xPos, yPos, zPos, rotation){
     super(scene);
+
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.zPos = zPos;
+    this.rotation = rotation;
 
     this.baseToJointUnit = new MyBaseToJointUnit(scene);
     this.baseAngle = 0;
@@ -12,10 +17,18 @@ class MyCrane extends CGFobject{
     this.holdPositionTimer = 0;
     this.HoldTime = 2;
 
-    this.RXPosition = 0;
-    this.RZPosition = (10+4)*Math.cos(45*Math.PI/180);
+    this.liftPlatformZpos = (10+4)*Math.cos(45*Math.PI/180);
+
+    // this.RXPosition = this.xPos;
+    // this.RZPosition = this.liftPlatformZpos + this.zPos;
+
+      this.RXPosition = this.liftPlatformZpos*(Math.sin(this.rotation)) + this.xPos;
+      this.RZPosition = this.liftPlatformZpos*(Math.cos(-this.rotation)) + this.zPos;
 
     this.state = 0;
+
+    //Lift Platform
+      this.liftPlatform = new MyPlatform(scene);
   }
 
   setAngles(jointAngle, baseAngle){
@@ -80,10 +93,16 @@ class MyCrane extends CGFobject{
   }
 
   display(vehicle){
+    this.scene.pushMatrix();
+      this.scene.translate(0,-this.yPos+0.2,-this.liftPlatformZpos)
+      this.liftPlatform.display();
+    this.scene.popMatrix();
+
+
     //MyBaseToJointUnit
     this.scene.pushMatrix();
         this.scene.rotate(this.baseAngle*Math.PI/180,0,1,0);
-        this.baseToJointUnit.display(vehicle, this.shouldDisplayCar());
+        this.baseToJointUnit.display(this.rotation, vehicle, this.shouldDisplayCar());
     this.scene.popMatrix();
   }
 

@@ -22,6 +22,7 @@ class MyInterface extends CGFinterface {
 		//  http://workshop.chromeexperiments.com/examples/gui
 
 		this.gui = new dat.GUI();
+		this.gui.close();
 
 		// add a button:
 		// the first parameter is the object that is being controlled (in this case the scene)

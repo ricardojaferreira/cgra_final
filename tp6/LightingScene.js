@@ -1,5 +1,4 @@
 var FPS = 100;
-var TERRAIN_DIVISIONS = 100;
 
 class LightingScene extends CGFscene
 {
@@ -31,28 +30,16 @@ class LightingScene extends CGFscene
 		this.materialDefault = new CGFappearance(this);
 
 		//altimetry
-		/*this.altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0 ],
-						 [ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 0.0 ],
-						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						 [ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0 ],
- 						 [ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0 ],
-						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						 [ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						 [ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0 ]
-						];*/
-
-
-						//	   0	   1	 2    3    4    5    6    7    7
-        this.altimetry= [ 	[ 12.0 , 12.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//0
-            				[ 18.0 , 18.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//1
-            				[ 32.0 , 32.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//2
-            				[ 32.0 , 32.0 , 0.0, 0.0, 12.0, 12.0, 0.0, 0.0, 32.0 ],//3
-            				[ 24.0 , 24.0 , 0.0, 0.0, 18.0, 18.0, 0.0, 0.0, 18.0 ],//4
-            				[ 18.0 , 18.0 , 0.0, 0.0, 24.0, 24.0, 0.0, 0.0, 18.0 ],//5
-            				[ 12.0 , 12.0 , 0.0, 0.0, 18.0, 18.0, 0.0, 0.0, 12.0 ],//6
-            				[ 18.0 , 18.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],//7
-            				[ 12.0 , 12.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ] //8
+						//	   0	   1	 2    3    4    5    6    7     8
+        this.altimetry= [ 	[ 12.0 , 12.0 , 0.0, 0.0, 8.0, 8.0, 0.0, 0.0, 32.0 ],	//0
+            				[ 18.0 , 18.0 , 0.0, 0.0, 8.0, 8.0, 0.0, 0.0, 32.0 ],	//1
+            				[ 32.0 , 32.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],	//2
+            				[ 32.0 , 32.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],	//3
+            				[ 24.0 , 24.0 , 0.0, 0.0, 12.0, 12.0, 0.0, 0.0, 18.0 ],	//4
+            				[ 18.0 , 18.0 , 0.0, 0.0, 24.0, 24.0, 0.0, 0.0, 18.0 ],	//5
+            				[ 12.0 , 12.0 , 0.0, 0.0, 18.0, 18.0, 0.0, 0.0, 12.0 ],	//6
+            				[ 18.0 , 18.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ],	//7
+            				[ 12.0 , 12.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 32.0 ] 	//8
         				];
 
 
@@ -62,10 +49,18 @@ class LightingScene extends CGFscene
 
 
 		//Vehicle
+		this.vehicleXPos = -5;
+		this.vehicleYpos = 1.40;
+		this.vehicleZPos = -10;
 		this.vehicle = new MyVehicle(this);
 
 		//Crane
-		this.crane = new MyCrane(this);
+		//Please specify here the crane position, don't change anywhere else
+        this.craneXpos = 5;
+        this.craneYPos = 1.3;
+        this.craneZPos = -20;
+        this.craneRotation = 90*degToRad;
+		this.crane = new MyCrane(this,this.craneXpos,this.craneYPos,-this.craneZPos, this.craneRotation);
 		this.forceCrane = false;
 		this.setTextureDropDown();
 
@@ -187,8 +182,14 @@ class LightingScene extends CGFscene
 
 		//Update crane angle
 		let xDif =  Math.abs(this.vehicle.getXpos() - this.crane.getRXPosition());
+		xDif += this.vehicleXPos;
 		//console.log("xDif" + xDif);
 		let zDif =  Math.abs(this.vehicle.getZpos() - this.crane.getRZPosition());
+		zDif += this.vehicleZPos;
+		//console.log("RXPos: " + this.crane.getRXPosition());
+        //console.log("RZPos: " + this.crane.getRZPosition());
+
+
 		//console.log("zDif" + zDif);
 		//console.log("Value -> " + (xDif<2 && zDif<2 && this.speed==0));
 		if(this.forceCrane || (xDif<2 && zDif<2 && this.speed==0)){
@@ -334,28 +335,30 @@ class LightingScene extends CGFscene
 			this.terrain.display();
 		this.popMatrix();
 
-		this.pushMatrix();
-         	this.translate(15,1.35,15);
-         	this.rotate(90*degToRad,0,1,0);
-			this.vehicle.display();
-		this.popMatrix();
-		this.vehicle.controlLights(this.luzes);
+		// this.pushMatrix();
+         // 	this.translate(15,1.35,15);
+         // 	this.rotate(90*degToRad,0,1,0);
+		// 	this.vehicle.display();
+		// this.popMatrix();
+		// this.vehicle.controlLights(this.luzes);
 
-        // if(!this.crane.shouldDisplayCar()){
-			// this.pushMatrix();
-			// 	this.translate(15,1.35,15);
-			// 	this.rotate(90*degToRad,0,1,0);
-			// 	this.vehicle.display();
-			// this.popMatrix();
-			// this.vehicle.controlLights(this.luzes);
-        // }
-        //
-        // this.pushMatrix();
-			// this.materialDefault.apply();
-			// this.translate(5,0,-22);
-        // 	this.rotate(-90*degToRad,0,1,0);
-			// this.crane.display(this.vehicle);
-        // this.popMatrix();
+        if(!this.crane.shouldDisplayCar()){
+			this.pushMatrix();
+				this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
+				//this.translate(0,1.35,0);
+				//this.rotate(90*degToRad,0,1,0);
+				this.vehicle.display();
+			this.popMatrix();
+			this.vehicle.controlLights(this.luzes);
+        }
+
+        this.pushMatrix();
+			this.materialDefault.apply();
+			this.translate(this.craneXpos,this.craneYPos,this.craneZPos);
+        	//this.translate(0,1.3,0);
+        	this.rotate(-this.craneRotation,0,1,0);
+			this.crane.display(this.vehicle);
+        this.popMatrix();
 
 
 

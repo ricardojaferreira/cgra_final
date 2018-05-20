@@ -24,7 +24,7 @@ class MyBaseToJointUnit extends CGFobject{
     return this.jointAngle;
   }
 
-  display(vehicle, displayCar){
+  display(craneRotation, vehicle, displayCar){
     //Base
     this.scene.pushMatrix();
       this.scene.rotate(-90*Math.PI/180,1,0,0);
@@ -56,7 +56,7 @@ class MyBaseToJointUnit extends CGFobject{
       this.scene.rotate(this.jointAngle*Math.PI/180,1,0,0);
       this.scene.translate(0,2,4)*/
       this.scene.rotate(this.jointAngle*Math.PI/180,1,0,0);
-      this.armJointCable.display(this.jointAngle,vehicle,displayCar);
+      this.armJointCable.display(this.jointAngle,craneRotation,vehicle,displayCar);
     this.scene.popMatrix();
 
   }
