@@ -2,9 +2,10 @@ var FPS = 100;
 
 class LightingScene extends CGFscene
 {
-	constructor()
+	constructor(myInterface)
 	{
 		super();
+		this.myInterface = myInterface;
 	};
 
 	init(application)
@@ -47,7 +48,6 @@ class LightingScene extends CGFscene
         let altSize = this.altimetry.length;
 		this.terrain = new MyTerrain(this, altSize-1, this.altimetry);
 
-
 		//Vehicle
 		this.vehicleXPos = -5;
 		this.vehicleYpos = 1.40;
@@ -79,8 +79,6 @@ class LightingScene extends CGFscene
 		this.showAxis=true;
 		this.option1=true;
 		this.option2=false;
-
-
 
 		this.keyAPressed = false;
 		this.keyDPressed = false;
@@ -122,12 +120,12 @@ class LightingScene extends CGFscene
 	}
 
 	checkKeys() {
-		if (this.gui.isKeyPressed("KeyW"))
+		if (this.gui.isKeyPressed("KeyW") && !this.crane.shouldDisplayCar())
 		{
 				if(this.speed<1)
 						this.speed+=0.01;
 		}
-		if (this.gui.isKeyPressed("KeyS"))
+		if (this.gui.isKeyPressed("KeyS") && !this.crane.shouldDisplayCar())
 		{
 				if(this.speed>-1)
 					this.speed-=0.01;
@@ -215,6 +213,15 @@ class LightingScene extends CGFscene
 				this.rotation+=2;
 				this.steering-=10*this.speed;
 			}
+		}
+
+		//prevent speed when crane has the car
+		if(!this.crane.shouldDisplayCar()){
+            this.myInterface.speedSlider.domElement.style.pointerEvents = "click";
+            this.myInterface.speedSlider.domElement.style.opacity = 1;
+		} else {
+            this.myInterface.speedSlider.domElement.style.pointerEvents = "none";
+            this.myInterface.speedSlider.domElement.style.opacity = .5;
 		}
 
 		this.vehicle.update(this.speed, this.steering, this.rotation);
@@ -359,8 +366,6 @@ class LightingScene extends CGFscene
         	this.rotate(-this.craneRotation,0,1,0);
 			this.crane.display(this.vehicle);
         this.popMatrix();
-
-
 
 		// ---- END Scene drawing section
 	};
