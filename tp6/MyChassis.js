@@ -14,6 +14,11 @@ class MyChassis extends CGFobject{
 
   }
 
+  updateTexture(texture){
+    this.frontWheels.updateTexture(texture);
+    this.backWheels.updateTexture(texture);
+  }
+
   changeSpeed(vel){
     this.deltaRotation = vel/10;
   }

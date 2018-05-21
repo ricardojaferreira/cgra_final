@@ -14,6 +14,13 @@ class MyBaseToJointUnit extends CGFobject{
     this.jointAngle = 0;
 
     this.height = 10;
+
+    this.craneTexture = new CGFappearance(scene);
+    this.craneTexture.setAmbient(0.8,0.8,0.8,1);
+    this.craneTexture.setDiffuse(0.8,0.8,0.8,1);
+    this.craneTexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
+    this.craneTexture.setShininess(120);
+    this.craneTexture.loadTexture('../resources/images/crane.jpg');
   }
 
   setAngle(jointAngle){
@@ -24,11 +31,12 @@ class MyBaseToJointUnit extends CGFobject{
     return this.jointAngle;
   }
 
-  display(vehicle, displayCar){
+  display(craneRotation, vehicle, displayCar){
     //Base
     this.scene.pushMatrix();
       this.scene.rotate(-90*Math.PI/180,1,0,0);
       this.scene.scale(0.5,0.5,0.75);
+        this.craneTexture.apply();
         this.base.display();
     this.scene.popMatrix();
 
@@ -37,6 +45,7 @@ class MyBaseToJointUnit extends CGFobject{
       this.scene.translate(0,0.75,0);
       this.scene.rotate(-90*Math.PI/180,1,0,0);
       this.scene.scale(0.5,0.5,0.75);
+        this.craneTexture.apply();
         this.circle.display();
     this.scene.popMatrix();
 
@@ -45,6 +54,7 @@ class MyBaseToJointUnit extends CGFobject{
       this.scene.translate(0,this.height/2-1.5*Math.cos(45*Math.PI/180),(-0.35+this.height/2)*Math.cos(45*Math.PI/180));
       this.scene.rotate(-45*Math.PI/180,1,0,0);
       this.scene.scale(0.5,0.5,this.height);
+        this.craneTexture.apply();
         this.armBaseJoint.display();
     this.scene.popMatrix();
 
@@ -56,7 +66,7 @@ class MyBaseToJointUnit extends CGFobject{
       this.scene.rotate(this.jointAngle*Math.PI/180,1,0,0);
       this.scene.translate(0,2,4)*/
       this.scene.rotate(this.jointAngle*Math.PI/180,1,0,0);
-      this.armJointCable.display(this.jointAngle,vehicle,displayCar);
+      this.armJointCable.display(this.jointAngle,craneRotation,vehicle,displayCar);
     this.scene.popMatrix();
 
   }

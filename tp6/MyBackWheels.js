@@ -9,6 +9,11 @@ class MyBackWheels extends CGFobject{
     this.rAxis = new MyAxis(scene,slices,stacks);
   };
 
+  updateTexture(texture){
+    this.blWheel.updateTexture(texture);
+    this.brWheel.updateTexture(texture);
+  }
+
   display(){
 
     this.scene.pushMatrix();

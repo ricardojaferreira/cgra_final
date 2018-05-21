@@ -73,7 +73,7 @@ class MyTrapezoid extends CGFobject{
       this.placeVertexAndNormals(z,this.regular);
       for(let i=0; i<4 ; i++){
         //Impede clipping do pneu
-        if(this.regular && i<3 || !this.regular){
+        if(this.regular && i<3|| !this.regular){
           this.indices.push(index,index+8,index+1)
           this.indices.push(index+8,index+9,index+1)
         }

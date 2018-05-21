@@ -21,7 +21,7 @@ class MyCar extends CGFobject{
 		this.lampTexture.setDiffuse(0.8,0.8,0.8,1);
 		this.lampTexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
 		this.lampTexture.setShininess(120);
-    this.lampTexture.loadTexture('../resources/images/donald.png');
+    this.lampTexture.loadTexture('../resources/images/lamp.jpg');
 
     this.glassTexture = new CGFappearance(scene);
     this.glassTexture.setAmbient(0.8,0.8,0.8,1);
@@ -46,8 +46,17 @@ class MyCar extends CGFobject{
 
   };
 
-  updateTexture(texture){
-    this.roofTexture = texture;
+  updateTexture(part,texture){
+    if(part=="Body")
+      this.roofTexture = texture;
+    else if(part=="Windows")
+      this.glassTexture = texture;
+    else if(part=="Wheels")
+      this.chassis.updateTexture(texture);
+    else if(part=="Headlights")
+      this.lampTexture = texture;
+
+
   }
 
   update(speed, steering){

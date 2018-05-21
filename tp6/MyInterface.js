@@ -49,9 +49,9 @@ class MyInterface extends CGFinterface {
     vehicle.add(this.scene, 'luzes');
     let textures = vehicle.addFolder('Textures');
 		textures.add(this.scene, 'Body', ["redbull", "dakar"] );
-    textures.add(this.scene, 'Windows', ["redbull", "dakar"] );
-    textures.add(this.scene, 'Wheels', ["redbull", "dakar"] );
-    textures.add(this.scene, 'Headlights', ["redbull", "dakar"] );
+    textures.add(this.scene, 'Windows', ["glass", "magnet"] );
+    textures.add(this.scene, 'Wheels', ["wheelTexture", "pointer"] );
+    textures.add(this.scene, 'Headlights', ["lamp", "donald"] );
 
 
 		// add a group of controls (and open/expand by defult)

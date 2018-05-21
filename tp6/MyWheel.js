@@ -33,6 +33,10 @@ class MyWheel extends CGFobject{
 
   }
 
+  updateTexture(texture){
+    this.wheelTexture = texture;
+  }
+
   display(){
     //Wheel
     this.scene.pushMatrix();

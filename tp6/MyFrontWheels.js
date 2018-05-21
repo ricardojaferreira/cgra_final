@@ -11,6 +11,11 @@ class MyFrontWheels extends CGFobject{
     this.steering = 0;
   };
 
+  updateTexture(texture){
+    this.flWheel.updateTexture(texture);
+    this.frWheel.updateTexture(texture);
+  }
+
   updateSteering(steering){
     this.steering=steering;
   }

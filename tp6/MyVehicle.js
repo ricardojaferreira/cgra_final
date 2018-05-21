@@ -37,8 +37,8 @@ class MyVehicle extends CGFobject{
 
   };
 
-  updateCarTexture(texture){
-    this.car.updateTexture(texture);
+  updateCarTexture(name,texture){
+    this.car.updateTexture(name,texture);
   }
 
   lights(onoff){
@@ -59,8 +59,32 @@ class MyVehicle extends CGFobject{
     return this.xPos;
   }
 
+  setXpos(xPos){
+    this.xPos = xPos;
+  }
+
   getZpos(){
     return this.zPos;
+  }
+
+  setZpos(zPos){
+    return this.zpos = zPos;
+  }
+
+  getYpos(){
+    return this.yPos;
+  }
+
+  setYpos(yPos){
+    this.yPos = yPos;
+  }
+
+  getRotation(){
+    return this.steering;
+  }
+
+  setRotation(rotation){
+    this.steering = rotation;
   }
 
   update(speed, steering, rotation){
