@@ -251,7 +251,7 @@ class LightingScene extends CGFscene
 		this.setGlobalAmbientLight(1,1,1, 1.0);
 
 		// Positions for four lights
-		this.lights[0].setPosition(4.0, 6.0, 1.0, 1.0);
+		this.lights[0].setPosition(-12.0, 5.0, 12.0, 1.0);
 		//this.lights[0].setVisible(true);
 		this.lights[0].setSpecular(1.0,1.0,1.0,1.0);
 		this.lights[0].setAmbient(0, 0, 0, 1.0);
@@ -260,7 +260,8 @@ class LightingScene extends CGFscene
 		this.lights[0].setLinearAttenuation(0);
 		this.lights[0].setQuadraticAttenuation(0);
 
-		this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
+		this.lights[1].setPosition(-12, 5.0, -12.0, 1.0);
+		this.lights[1].setSpecular(1.0, 1.0, 1.0, 1.0);
 		//this.lights[1].setVisible(true);
 		this.lights[1].setAmbient(0, 0, 0, 1.0);
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -268,22 +269,23 @@ class LightingScene extends CGFscene
 		this.lights[1].setLinearAttenuation(0);
 		this.lights[1].setQuadraticAttenuation(0);
 
-		this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
+		this.lights[2].setPosition(12.0, 5.0, 12.0, 1.0);
 		this.lights[2].setSpecular(1.0, 1.0, 1.0, 1.0);
 		//this.lights[2].setVisible(true);
 		this.lights[2].setAmbient(0, 0, 0, 1.0);
 		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
-		this.lights[2].setConstantAttenuation(0);
+		this.lights[2].setConstantAttenuation(0.5);
 		this.lights[2].setLinearAttenuation(1.0);
-		this.lights[2].setQuadraticAttenuation(0);
+		this.lights[2].setQuadraticAttenuation(0.6);
 
-		this.lights[3].setPosition(4.0, 6.0, 5.0, 1.0);
+		this.lights[3].setPosition(12.0, 5.0, -12.0, 1.0);
+		this.lights[3].setSpecular(1.0, 1.0, 1.0, 1.0);
 		//this.lights[3].setVisible(true);
 		this.lights[3].setAmbient(0, 0, 0, 1.0);
 		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
-		this.lights[3].setConstantAttenuation(0);
+		this.lights[3].setConstantAttenuation(0.5);
 		this.lights[3].setLinearAttenuation(0);
-		this.lights[3].setQuadraticAttenuation(0.1);
+		this.lights[3].setQuadraticAttenuation(0.8);
 
 	};
 
