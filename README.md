@@ -7,7 +7,7 @@ Final Project for Computer Graphics
 - [ ] MyPlane tem textura repeat activa? Certificar
 - [X] FPS afectam o controlo do carro?
 - [ ] FPS afectam o desenho do carro no guindaste. Perceber porquê.
-- [ ] Mexer em mais texturas através de opções
+- [X] Mexer em mais texturas através de opções
 - [X] Funciona para diferentes nrDivs certo?
 - [X] Textura no guindaste, e na plataforma
 - [ ] Corrigir desvio quando o carro faz attach
