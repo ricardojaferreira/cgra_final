@@ -54,7 +54,12 @@ class LightingScene extends CGFscene
 		this.vehicleXPos = -5;
 		this.vehicleYpos = 1.40;
 		this.vehicleZPos = -10;
+
+		//vehicles Array
+		this.activeVehicle = 0; //indice
+		this.vehicles = [];
 		this.vehicle = new MyVehicle(this);
+		this.vehicles.push(this.vehicle);
 
 		//Crane
 		//Please specify here the crane position, don't change anywhere else
@@ -273,30 +278,30 @@ class LightingScene extends CGFscene
 		let index = this.vehicleAppearecesList[0].get(this.Body);
 		if(index!=this.currentVehicleAppearance[0]){
 			this.currentVehicleAppearance[0] = index;
-			this.vehicle.updateCarTexture("Body",this.vehicleAppearances[0][index]);
+			this.vehicles[this.activeVehicle].updateCarTexture("Body",this.vehicleAppearances[0][index]);
 		}
 		index = this.vehicleAppearecesList[1].get(this.Windows);
 		if(index!=this.currentVehicleAppearance[1]){
 			this.currentVehicleAppearance[1] = index;
-			this.vehicle.updateCarTexture("Windows",this.vehicleAppearances[1][index]);
+			this.vehicles[this.activeVehicle].updateCarTexture("Windows",this.vehicleAppearances[1][index]);
 		}
 		index = this.vehicleAppearecesList[2].get(this.Wheels);
 		if(index!=this.currentVehicleAppearance[2]){
 			this.currentVehicleAppearance[2] = index;
-			this.vehicle.updateCarTexture("Wheels",this.vehicleAppearances[2][index]);
+			this.vehicles[this.activeVehicle].updateCarTexture("Wheels",this.vehicleAppearances[2][index]);
 		}
 		index = this.vehicleAppearecesList[3].get(this.Headlights);
 		if(index!=this.currentVehicleAppearance[3]){
 			this.currentVehicleAppearance[3] = index;
-			this.vehicle.updateCarTexture("Headlights",this.vehicleAppearances[3][index]);
+			this.vehicles[this.activeVehicle].updateCarTexture("Headlights",this.vehicleAppearances[3][index]);
 		}
 
 		
 		//Update crane angle
-		let xDif =  Math.abs(this.vehicle.getXpos() - this.crane.getRXPosition());
+		let xDif =  Math.abs(this.vehicles[this.activeVehicle].getXpos() - this.crane.getRXPosition());
 		xDif += this.vehicleXPos;
 		//console.log("xDif" + xDif);
-		let zDif =  Math.abs(this.vehicle.getZpos() - this.crane.getRZPosition());
+		let zDif =  Math.abs(this.vehicles[this.activeVehicle].getZpos() - this.crane.getRZPosition());
 		zDif += this.vehicleZPos;
 		//console.log("RXPos: " + this.crane.getRXPosition());
         //console.log("RZPos: " + this.crane.getRZPosition());
@@ -338,7 +343,7 @@ class LightingScene extends CGFscene
 						this.craneDisplaysCar = true;
 		}
 
-		this.vehicle.update(this.speed, this.steering, this.rotation);
+		this.vehicles[this.activeVehicle].update(this.speed, this.steering, this.rotation);
 
 
 	}
@@ -470,9 +475,9 @@ class LightingScene extends CGFscene
 				this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
 				//this.translate(0,1.35,0);
 				//this.rotate(90*degToRad,0,1,0);
-				this.vehicle.display();
+				this.vehicles[this.activeVehicle].display();
 			this.popMatrix();
-			this.vehicle.controlLights(this.luzes);
+			//this.vehicle.controlLights(this.luzes);
         }
 
         this.pushMatrix();
@@ -480,7 +485,7 @@ class LightingScene extends CGFscene
 			this.translate(this.craneXpos,this.craneYPos,this.craneZPos);
         	//this.translate(0,1.3,0);
         	this.rotate(-this.craneRotation,0,1,0);
-			this.crane.display(this.vehicle);
+			this.crane.display(this.vehicles[this.activeVehicle]);
         this.popMatrix();
 
 				this.pushMatrix();
