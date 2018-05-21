@@ -55,12 +55,13 @@ class LightingScene extends CGFscene
 
 		//Crane
 		//Please specify here the crane position, don't change anywhere else
-        this.craneXpos = 5;
-        this.craneYPos = 1.3;
-        this.craneZPos = -20;
-        this.craneRotation = 90*degToRad;
+		    this.craneXpos = 5;
+		    this.craneYPos = 1.3;
+		    this.craneZPos = -20;
+		    this.craneRotation = 90*degToRad;
 		this.crane = new MyCrane(this,this.craneXpos,this.craneYPos,-this.craneZPos, this.craneRotation);
 		this.forceCrane = false;
+		this.craneDisplaysCar = false;
 		this.setTextureDropDown();
 
 		//FPS
@@ -170,7 +171,7 @@ class LightingScene extends CGFscene
 		this.deltaTime = currTime - this.lastTime;
 		this.lastTime = currTime;
 
-		//Update FPS 
+		//Update FPS
 		if(this.FPS!=this.oldFps){
 			this.setUpdatePeriod(1000/this.FPS);
 			this.oldFps = this.Fps;
@@ -193,7 +194,6 @@ class LightingScene extends CGFscene
 		zDif += this.vehicleZPos;
 		//console.log("RXPos: " + this.crane.getRXPosition());
         //console.log("RZPos: " + this.crane.getRZPosition());
-
 
 		//console.log("zDif" + zDif);
 		//console.log("Value -> " + (xDif<2 && zDif<2 && this.speed==0));
@@ -224,11 +224,13 @@ class LightingScene extends CGFscene
 
 		//prevent speed when crane has the car
 		if(!this.crane.shouldDisplayCar()){
+						this.craneDisplaysCar = false;
             this.myInterface.speedSlider.domElement.style.pointerEvents = "click";
             this.myInterface.speedSlider.domElement.style.opacity = 1;
 		} else {
             this.myInterface.speedSlider.domElement.style.pointerEvents = "none";
             this.myInterface.speedSlider.domElement.style.opacity = .5;
+						this.craneDisplaysCar = true;
 		}
 
 		this.vehicle.update(this.speed, this.steering, this.rotation);
@@ -356,7 +358,7 @@ class LightingScene extends CGFscene
 		// this.popMatrix();
 		// this.vehicle.controlLights(this.luzes);
 
-        if(!this.crane.shouldDisplayCar()){
+        if(!this.craneDisplaysCar){
 			this.pushMatrix();
 				this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
 				//this.translate(0,1.35,0);
