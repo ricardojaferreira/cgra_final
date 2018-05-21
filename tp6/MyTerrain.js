@@ -3,7 +3,7 @@ class MyTerrain extends CGFobject{
   constructor(scene, nrDivs, altimetry)
   {
     super(scene);
-    this.plane = new Plane(scene, nrDivs, altimetry);
+    this.plane = new Plane(scene, nrDivs, altimetry,0,20,0,20);
 
 
 		// Terrain Texture
@@ -12,8 +12,7 @@ class MyTerrain extends CGFobject{
 		this.terrainTexture.setDiffuse(0.8,0.8,0.8,1);
 		this.terrainTexture.setSpecular(0.33,0.18,0.05,1);
 		this.terrainTexture.setShininess(1);
-    this.terrainTexture.loadTexture('../resources/images/terrain.jpg');
-    this.terrainTexture.setTextureWrap('REPEAT','REPEAT');
+    this.terrainTexture.loadTexture('../resources/images/terrain.png');
   }
 
   display(){

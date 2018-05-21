@@ -2,7 +2,7 @@
 /** Represents a plane with nrDivs divisions along both axis, with center at (0,0) */
 class Plane extends CGFobject{
 
-	constructor(scene, nrDivs, altimetry)
+	constructor(scene, nrDivs, altimetry, minS, maxS, minT, maxT)
 	{
 		super(scene);
 
@@ -12,6 +12,10 @@ class Plane extends CGFobject{
 		this.nrDivs = nrDivs;
 		this.patchLength = 1.0 / nrDivs;
 		this.altimetry = altimetry;
+		this.minS = minS;
+		this.maxS = maxS;
+		this.minT = minT;
+		this.maxT = maxT;
 
 		this.initBuffers();
 	};
@@ -33,6 +37,11 @@ class Plane extends CGFobject{
 		12  13  |  14  15
 
 		*/
+
+		let s = this.minS;
+		let t = this.minT;
+		let sInc = (this.maxS-this.minS)/this.nrDivs;
+		let tInc = (this.maxT-this.minT)/this.nrDivs;
 
 		// Generate vertices and normals
 		this.vertices = [];
@@ -56,14 +65,14 @@ class Plane extends CGFobject{
 				this.normals.push(0,0,this.altimetry[j][i]);
 
 				// texCoords should be computed here; uncomment and fill the blanks
-				this.texCoords.push(xCoord+0.5, -yCoord+0.5);
+				//this.texCoords.push(xCoord+0.5, -yCoord+0.5);
+				this.texCoords.push(s+ i*sInc, t+ j*tInc);
 
 				xCoord += this.patchLength;
 			}
 			yCoord -= this.patchLength;
+			s = this.minS;
 		}
-
-		console.log("Vertices coord: " + this.vertices);
 
 		// Generating indices
 		/* for nrDivs = 3 output will be
