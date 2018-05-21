@@ -17,6 +17,8 @@ class MyCrane extends CGFobject{
     this.holdPositionTimer = 0;
     this.HoldTime = 2;
 
+    this.displayCar = false;
+
     this.liftPlatformZpos = (10+4)*Math.cos(45*Math.PI/180);
 
     // this.RXPosition = this.xPos;
@@ -43,6 +45,15 @@ class MyCrane extends CGFobject{
     this.baseAngle = baseAngle;
   }
 
+  releaseVehicle(vehicle, vehicleRot){
+    vehicle.setXpos(this.xPos-this.liftPlatformZpos+4);
+    vehicle.setYpos(this.yPos+5);
+    vehicle.setZpos(this.zPos+0.5);
+    vehicle.rotate=true;
+    vehicle.falling=true;
+    this.displayCar=false;
+  }
+
   update(deltaTime){
     if(deltaTime>100000)
       return;
@@ -52,13 +63,15 @@ class MyCrane extends CGFobject{
       let angle = this.baseAngle + this.animationSpeed*(360/60);
       if(angle<this.baseMaxAngle)
         this.baseAngle = angle;
-      else
-        this.state = 1;
+      else{
+          this.state = 1;
+      }
     }
     else if(this.state==1){
       this.gotoMaxJointAngle(deltaTime, 2);
     }
     else if(this.state == 2){
+        this.displayCar=true;
       this.holdPositionTimer += this.animationSpeed;
       if(this.holdPositionTimer>this.HoldTime){
         this.state = 3;
@@ -119,11 +132,11 @@ class MyCrane extends CGFobject{
   }
 
   setState(state){
-    this.state = state;;
+    this.state = state;
   }
 
   shouldDisplayCar(){
-    return (this.state>1 && this.state<5);
+    return (this.displayCar);
   }
 
   getRXPosition(){

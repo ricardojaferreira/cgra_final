@@ -35,6 +35,9 @@ class MyVehicle extends CGFobject{
 
     this.steering=0;
 
+    this.rotate=false;
+    this.falling=false;
+    this.carDead=false;
   };
 
   updateCarTexture(name,texture){
@@ -91,8 +94,18 @@ class MyVehicle extends CGFobject{
 
     this.car.update(speed*10, rotation*degToRad);
     this.xPos+=(Math.cos(steering*degToRad)*speed);
+    if(this.yPos>0 && this.falling){
+      this.yPos-=0.1;
+    }
     this.zPos+=(Math.sin(steering*degToRad)*speed);
     this.steering = steering*degToRad;
+    if(this.rotate){
+      this.steering+=(180*degToRad);
+    }
+
+    if(this.falling && (this.yPos==0 || this.yPos<0)){
+      this.carDead = true;
+    }
 
   }
 

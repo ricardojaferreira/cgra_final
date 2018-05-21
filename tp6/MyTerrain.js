@@ -13,6 +13,7 @@ class MyTerrain extends CGFobject{
 		this.terrainTexture.setSpecular(0.33,0.18,0.05,1);
 		this.terrainTexture.setShininess(1);
     this.terrainTexture.loadTexture('../resources/images/terrain.jpg');
+    //this.terrainTexture.setTextureWrap('REPEAT','REPEAT');
   }
 
   display(){

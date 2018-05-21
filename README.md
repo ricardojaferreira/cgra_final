@@ -11,7 +11,7 @@ Final Project for Computer Graphics
 - [X] Funciona para diferentes nrDivs certo?
 - [X] Textura no guindaste, e na plataforma
 - [ ] Corrigir desvio quando o carro faz attach
-- [ ] Animação de queda do carro
+- [X] Animação de queda do carro
 - [X] Inibir aceleração quando carro está no guindaste
 - [X] Verificar a iluminação da cena
 - [ ] Limpar variáveis e partes do código que não estão a ser utilizados
@@ -19,3 +19,8 @@ Final Project for Computer Graphics
 ### Extras
 
 - [ ] Luzes no carro
+
+### BUGS ou Correcções
+
+- [ ] Colocar a animação do carro a cair mais rápida?
+- [ ] Quando se adiciona um novo carro (após a queda do primeiro) deixa de ser possível alterar o slider da velocidade com o rato 
