@@ -13,7 +13,7 @@ Final Project for Computer Graphics
 - [ ] Corrigir desvio quando o carro faz attach
 - [ ] Animação de queda do carro
 - [X] Inibir aceleração quando carro está no guindaste
-- [ ] Verificar a iluminação da cena
+- [X] Verificar a iluminação da cena
 - [ ] Limpar variáveis e partes do código que não estão a ser utilizados
 
 ### Extras
