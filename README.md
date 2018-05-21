@@ -8,7 +8,7 @@ Final Project for Computer Graphics
 - [ ] FPS afectam o controlo do carro?
 - [ ] Mexer em mais texturas através de opções
 - [X] Funciona para diferentes nrDivs certo?
-- [ ] Textura no guindaste, e na plataforma
+- [X] Textura no guindaste, e na plataforma
 - [ ] Corrigir desvio quando o carro faz attach
 - [ ] Animação de queda do carro
 - [X] Inibir aceleração quando carro está no guindaste
