@@ -29,6 +29,9 @@ class LightingScene extends CGFscene
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
+		//External Solids
+		this.external = new SolidosExternos(this);
+
 		//altimetry
 						//	   0	   1	 2    3    4    5    6    7     8
         this.altimetry= [ 	[ 12.0 , 12.0 , 0.0, 0.0, 8.0, 8.0, 0.0, 0.0, 32.0 ],	//0
@@ -376,6 +379,10 @@ class LightingScene extends CGFscene
 			this.crane.display(this.vehicle);
         this.popMatrix();
 
+				this.pushMatrix();
+				this.translate(0,0,30);
+				this.external.display();
+				this.popMatrix();
 		// ---- END Scene drawing section
 	};
 };
