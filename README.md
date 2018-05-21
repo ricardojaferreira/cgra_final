@@ -4,7 +4,7 @@ Final Project for Computer Graphics
 ### TODO
 
 - [X] Meter fora de cena os elementos
-- [ ] MyPlane tem textura repeat activa? Certificar
+- [X] MyPlane tem textura repeat activa? Certificar
 - [X] FPS afectam o controlo do carro?
 - [ ] FPS afectam o desenho do carro no guindaste. Perceber porquê.
 - [X] Mexer em mais texturas através de opções
