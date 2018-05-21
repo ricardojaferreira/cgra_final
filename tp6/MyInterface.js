@@ -8,6 +8,7 @@ class MyInterface extends CGFinterface {
 	 */
  	constructor () {
  		super();
+ 		this.speedSlider = null;
  	}
 
 	/**
@@ -22,13 +23,15 @@ class MyInterface extends CGFinterface {
 		//  http://workshop.chromeexperiments.com/examples/gui
 
 		this.gui = new dat.GUI();
+		this.gui.close();
 
 		// add a button:
 		// the first parameter is the object that is being controlled (in this case the scene)
 		// the identifier 'doSomething' must be a function declared as part of that object (i.e. a member of the scene class)
 		// e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); };
 
-		this.gui.add(this.scene, 'doSomething');
+
+    this.gui.add(this.scene, 'FPS', 10, 100).listen();
 
     //add a group of Light
 
@@ -38,7 +41,7 @@ class MyInterface extends CGFinterface {
     lights.add(this.scene, 'luz2');
     lights.add(this.scene, 'luz3');
     lights.add(this.scene, 'luz4');
-		
+
     this.gui.add(this.scene, 'forceCrane');
 
     //vehicle options
@@ -48,7 +51,7 @@ class MyInterface extends CGFinterface {
 		vehicle.add(this.scene, 'Texture', ["redbull", "dakar"] );
 
 		// add a group of controls (and open/expand by defult)
-	
+
 
 		var group=this.gui.addFolder("Options");
 		group.open();
@@ -65,7 +68,7 @@ class MyInterface extends CGFinterface {
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-		var speedSlider = this.gui.add(this.scene, 'speed', -1, 1).listen();
+		this.speedSlider = this.gui.add(this.scene, 'speed', -1, 1).listen();
 
 
     this.initKeys();
