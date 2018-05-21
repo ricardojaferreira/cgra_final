@@ -29,12 +29,11 @@ serialInclude([
 	'MyMagnetAndCable.js',
 	'MyMagnetToJointUnit.js',
 	'MyBaseToJointUnit.js',
-	'MyPlatform.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
-        var myInterface = new MyInterface();
-		var myScene = new LightingScene(myInterface);
+		var myScene = new LightingScene();
+		var myInterface = new MyInterface();
 
 		app.init();
 

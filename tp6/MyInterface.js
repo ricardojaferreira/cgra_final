@@ -8,7 +8,6 @@ class MyInterface extends CGFinterface {
 	 */
  	constructor () {
  		super();
- 		this.speedSlider = null;
  	}
 
 	/**
@@ -23,7 +22,6 @@ class MyInterface extends CGFinterface {
 		//  http://workshop.chromeexperiments.com/examples/gui
 
 		this.gui = new dat.GUI();
-		this.gui.close();
 
 		// add a button:
 		// the first parameter is the object that is being controlled (in this case the scene)
@@ -67,7 +65,7 @@ class MyInterface extends CGFinterface {
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-		this.speedSlider = this.gui.add(this.scene, 'speed', -1, 1).listen();
+		var speedSlider = this.gui.add(this.scene, 'speed', -1, 1).listen();
 
 
     this.initKeys();
