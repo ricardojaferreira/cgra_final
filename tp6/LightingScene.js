@@ -99,114 +99,49 @@ class LightingScene extends CGFscene
 	};
 
 	setTextureDropDown(){
+		this.textureMap = new Map();
+		this.textureMap.set(0,"Body");
+		this.textureMap.set(1,"Windows");
+		this.textureMap.set(2,"Wheels");
+		this.textureMap.set(3,"Headlights");
+		this.textures = [];
+
+		this.Body = "redbull";
+		this.Windows = "glass";
+		this.Wheels = "wheelTexture";
+		this.Headlights = "lamp";
+
 		this.currentVehicleAppearance = [];
 		this.vehicleAppearances = [];
 		this.vehicleAppearecesList = [];
-		this.setTextureBodyDropDown();
-		this.setTextureWindowsDropDown();
-		this.setTextureWheelsDropDown();
-		this.setTextureHeadlightsDropDown();
+
+		this.fillAppearancesObjects(0,"redBull.jpg","dakar.jpg","redbull","dakar");
+		this.fillAppearancesObjects(1,"glass.png","magnet.jpg","glass","magnet");
+		this.fillAppearancesObjects(2,"wheelTexture.jpg","pointer.png","wheelTexture","pointer");
+		this.fillAppearancesObjects(3,"lamp.jpg","donald.png","lamp","donald");
 	}
 
-	setTextureBodyDropDown(){
+	fillAppearancesObjects(index, textureFileName1, textureFileName2, texture1, texture2){
 		let text1 = new CGFappearance(this);
   	text1.setAmbient(0.8,0.8,0.8,1);
 		text1.setDiffuse(0.8,0.8,0.8,1);
 		text1.setSpecular(0.1,0.1,0.1,1);
 		text1.setShininess(120);
-  	text1.loadTexture('../resources/images/redBull.jpg');
+  	text1.loadTexture('../resources/images/'+textureFileName1);
 
 		let text2 = new CGFappearance(this);
     text2.setAmbient(0.8,0.8,0.8,1);
 		text2.setDiffuse(0.8,0.8,0.8,1);
 		text2.setSpecular(0.1,0.1,0.1,1);
 		text2.setShininess(120);
-    text2.loadTexture('../resources/images/dakar.jpg');
+		text2.loadTexture('../resources/images/'+textureFileName2);
 
-		this.vehicleAppearances[0] = [text1, text2];
-		this.vehicleAppearecesList[0] = new Map();
-		this.vehicleAppearecesList[0].set("redbull", 0);
-		this.vehicleAppearecesList[0].set("dakar", 1);
+		this.vehicleAppearances[index] = [text1, text2];
+		this.vehicleAppearecesList[index] = new Map();
+		this.vehicleAppearecesList[index].set(texture1, 0);
+		this.vehicleAppearecesList[index].set(texture2, 1);
 
-		this.vehicleAppearancesB = [text1, text2];
-		this.vehicleAppearecesListB = new Map();
-		this.vehicleAppearecesListB.set("redbull", 0);
-		this.vehicleAppearecesListB.set("dakar", 1);
-
-		this.Body = "redbull";
-		this.currentVehicleAppearanceB = this.vehicleAppearecesListB.get(this.Body);
-	}
-
-	setTextureWindowsDropDown(){
-		let text1 = new CGFappearance(this);
-  	text1.setAmbient(0.8,0.8,0.8,1);
-		text1.setDiffuse(0.8,0.8,0.8,1);
-		text1.setSpecular(0.1,0.1,0.1,1);
-		text1.setShininess(120);
-  	text1.loadTexture('../resources/images/glass.png');
-
-		let text2 = new CGFappearance(this);
-    text2.setAmbient(0.8,0.8,0.8,1);
-		text2.setDiffuse(0.8,0.8,0.8,1);
-		text2.setSpecular(0.1,0.1,0.1,1);
-		text2.setShininess(120);
-    text2.loadTexture('../resources/images/magnet.jpg');
-
-		this.vehicleAppearances[1] = [text1, text2];
-		this.vehicleAppearecesList[1] = new Map();
-		this.vehicleAppearecesList[1].set("glass", 0);
-		this.vehicleAppearecesList[1].set("magnet", 1);
-
-		this.Windows = "glass";
-		this.currentVehicleAppearance[1] = this.vehicleAppearecesList[1].get(this.Windows);
-	}
-
-	setTextureWheelsDropDown(){
-		let text1 = new CGFappearance(this);
-  	text1.setAmbient(0.8,0.8,0.8,1);
-		text1.setDiffuse(0.8,0.8,0.8,1);
-		text1.setSpecular(0.1,0.1,0.1,1);
-		text1.setShininess(120);
-  	text1.loadTexture('../resources/images/wheelTexture.jpg');
-
-		let text2 = new CGFappearance(this);
-    text2.setAmbient(0.8,0.8,0.8,1);
-		text2.setDiffuse(0.8,0.8,0.8,1);
-		text2.setSpecular(0.1,0.1,0.1,1);
-		text2.setShininess(120);
-    text2.loadTexture('../resources/images/pointer.png');
-
-		this.vehicleAppearances[2] = [text1, text2];
-		this.vehicleAppearecesList[2] = new Map();
-		this.vehicleAppearecesList[2].set("wheelTexture", 0);
-		this.vehicleAppearecesList[2].set("pointer", 1);
-
-		this.Wheels = "wheelTexture";
-		this.currentVehicleAppearance[2] = this.vehicleAppearecesList[2].get(this.Wheels);
-	}
-
-	setTextureHeadlightsDropDown(){
-		let text1 = new CGFappearance(this);
-  	text1.setAmbient(0.8,0.8,0.8,1);
-		text1.setDiffuse(0.8,0.8,0.8,1);
-		text1.setSpecular(0.1,0.1,0.1,1);
-		text1.setShininess(120);
-  	text1.loadTexture('../resources/images/lamp.jpg');
-
-		let text2 = new CGFappearance(this);
-    text2.setAmbient(0.8,0.8,0.8,1);
-		text2.setDiffuse(0.8,0.8,0.8,1);
-		text2.setSpecular(0.1,0.1,0.1,1);
-		text2.setShininess(120);
-    text2.loadTexture('../resources/images/donald.png');
-
-		this.vehicleAppearances[3] = [text1, text2];
-		this.vehicleAppearecesList[3] = new Map();
-		this.vehicleAppearecesList[3].set("lamp", 0);
-		this.vehicleAppearecesList[3].set("donald", 1);
-
-		this.Headlights = "lamp";
-		this.currentVehicleAppearance[3] = this.vehicleAppearecesList[3].get(this.Headlights);
+		this.currentVehicleAppearance[index] = this.vehicleAppearecesList[index].get(texture1);
 	}
 
 	checkKeys() {
@@ -268,30 +203,20 @@ class LightingScene extends CGFscene
 			this.oldFps = this.Fps;
 		}
 
-
 		//Update texture car
-		let index = this.vehicleAppearecesList[0].get(this.Body);
-		if(index!=this.currentVehicleAppearance[0]){
-			this.currentVehicleAppearance[0] = index;
-			this.vehicle.updateCarTexture("Body",this.vehicleAppearances[0][index]);
-		}
-		index = this.vehicleAppearecesList[1].get(this.Windows);
-		if(index!=this.currentVehicleAppearance[1]){
-			this.currentVehicleAppearance[1] = index;
-			this.vehicle.updateCarTexture("Windows",this.vehicleAppearances[1][index]);
-		}
-		index = this.vehicleAppearecesList[2].get(this.Wheels);
-		if(index!=this.currentVehicleAppearance[2]){
-			this.currentVehicleAppearance[2] = index;
-			this.vehicle.updateCarTexture("Wheels",this.vehicleAppearances[2][index]);
-		}
-		index = this.vehicleAppearecesList[3].get(this.Headlights);
-		if(index!=this.currentVehicleAppearance[3]){
-			this.currentVehicleAppearance[3] = index;
-			this.vehicle.updateCarTexture("Headlights",this.vehicleAppearances[3][index]);
+		this.textures[0] = this.Body;
+		this.textures[1] = this.Windows;
+		this.textures[2] = this.Wheels;
+		this.textures[3] = this.Headlights;
+
+		for(let i=0; i<this.textures.length; i++){
+			let index = this.vehicleAppearecesList[i].get(this.textures[i]);
+			if(index!=this.currentVehicleAppearance[i]){
+				this.currentVehicleAppearance[i] = index;
+				this.vehicle.updateCarTexture(this.textureMap.get(i),this.vehicleAppearances[i][index]);
+			}
 		}
 
-		
 		//Update crane angle
 		let xDif =  Math.abs(this.vehicle.getXpos() - this.crane.getRXPosition());
 		xDif += this.vehicleXPos;
