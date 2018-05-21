@@ -63,8 +63,9 @@ class LightingScene extends CGFscene
 		    this.craneZPos = -20;
 		    this.craneRotation = 90*degToRad;
 		this.crane = new MyCrane(this,this.craneXpos,this.craneYPos,-this.craneZPos, this.craneRotation);
-		this.forceCrane = false;
 		this.craneDisplaysCar = false;
+
+
 		this.setTextureDropDown();
 
 		//FPS
@@ -98,6 +99,37 @@ class LightingScene extends CGFscene
 	};
 
 	setTextureDropDown(){
+		this.setTextureBodyDropDown();
+		this.setTextureWindowsDropDown();
+		this.setTextureWheelsDropDown();
+		this.setTextureHeadlightsDropDown();
+	}
+
+	setTextureBodyDropDown(){
+		let text1 = new CGFappearance(this);
+  	text1.setAmbient(0.8,0.8,0.8,1);
+		text1.setDiffuse(0.8,0.8,0.8,1);
+		text1.setSpecular(0.1,0.1,0.1,1);
+		text1.setShininess(120);
+  	text1.loadTexture('../resources/images/redbull.jpg');
+
+		let text2 = new CGFappearance(this);
+    text2.setAmbient(0.8,0.8,0.8,1);
+		text2.setDiffuse(0.8,0.8,0.8,1);
+		text2.setSpecular(0.1,0.1,0.1,1);
+		text2.setShininess(120);
+    text2.loadTexture('../resources/images/dakar.jpg');
+
+		this.vehicleBodyAppearances = [text1, text2];
+		this.vehicleBodyAppearecesList = new Map();
+		this.vehicleBodyAppearecesList.set("redbull", 0);
+		this.vehicleBodyAppearecesList.set("dakar", 1);
+
+		this.Body = "redbull";
+		this.currVehicleBodyAppearance = this.vehicleBodyAppearecesList.get(this.Body);
+	}
+
+	setTextureWindowsDropDown(){
 		this.text1 = new CGFappearance(this);
     	this.text1.setAmbient(0.8,0.8,0.8,1);
 		this.text1.setDiffuse(0.8,0.8,0.8,1);
@@ -117,8 +149,56 @@ class LightingScene extends CGFscene
 		this.vehicleAppearecesList.set("redbull", 0);
 		this.vehicleAppearecesList.set("dakar", 1);
 
-		this.Texture = "redbull";
-		this.currVehicleAppearance = this.vehicleAppearecesList.get(this.Texture);
+		this.Windows = "redbull";
+		this.currVehicleAppearance = this.vehicleAppearecesList.get(this.Windows);
+	}
+
+	setTextureWheelsDropDown(){
+		this.text1 = new CGFappearance(this);
+    	this.text1.setAmbient(0.8,0.8,0.8,1);
+		this.text1.setDiffuse(0.8,0.8,0.8,1);
+		this.text1.setSpecular(0.1,0.1,0.1,1);
+		this.text1.setShininess(120);
+    	this.text1.loadTexture('../resources/images/redbull.jpg');
+
+		this.text2 = new CGFappearance(this);
+    	this.text2.setAmbient(0.8,0.8,0.8,1);
+		this.text2.setDiffuse(0.8,0.8,0.8,1);
+		this.text2.setSpecular(0.1,0.1,0.1,1);
+		this.text2.setShininess(120);
+    	this.text2.loadTexture('../resources/images/dakar.jpg');
+
+		this.vehicleAppearances = [this.text1, this.text2];
+		this.vehicleAppearecesList = new Map();
+		this.vehicleAppearecesList.set("redbull", 0);
+		this.vehicleAppearecesList.set("dakar", 1);
+
+		this.Wheels = "redbull";
+		this.currVehicleAppearance = this.vehicleAppearecesList.get(this.Wheels);
+	}
+
+	setTextureHeadlightsDropDown(){
+		this.text1 = new CGFappearance(this);
+    	this.text1.setAmbient(0.8,0.8,0.8,1);
+		this.text1.setDiffuse(0.8,0.8,0.8,1);
+		this.text1.setSpecular(0.1,0.1,0.1,1);
+		this.text1.setShininess(120);
+    	this.text1.loadTexture('../resources/images/redbull.jpg');
+
+		this.text2 = new CGFappearance(this);
+    	this.text2.setAmbient(0.8,0.8,0.8,1);
+		this.text2.setDiffuse(0.8,0.8,0.8,1);
+		this.text2.setSpecular(0.1,0.1,0.1,1);
+		this.text2.setShininess(120);
+    	this.text2.loadTexture('../resources/images/dakar.jpg');
+
+		this.vehicleAppearances = [this.text1, this.text2];
+		this.vehicleAppearecesList = new Map();
+		this.vehicleAppearecesList.set("redbull", 0);
+		this.vehicleAppearecesList.set("dakar", 1);
+
+		this.Headlights = "redbull";
+		this.currVehicleAppearance = this.vehicleAppearecesList.get(this.Headlights);
 	}
 
 	checkKeys() {
@@ -178,15 +258,14 @@ class LightingScene extends CGFscene
 		if(this.FPS!=this.oldFps){
 			this.setUpdatePeriod(1000/this.FPS);
 			this.oldFps = this.Fps;
-			console.log("new value:" + this.FPS)
 		}
 
 
 		//Update texture car
-		let index = this.vehicleAppearecesList.get(this.Texture);
-		if(index!=this.currVehicleAppearance){
-			this.currVehicleAppearance = index;
-			this.vehicle.updateCarTexture(this.vehicleAppearances[index]);
+		let index = this.vehicleBodyAppearecesList.get(this.Body);
+		if(index!=this.currVehicleBodyAppearance){
+			this.currVehicleBodyAppearance = index;
+			this.vehicle.updateCarTexture(this.vehicleBodyAppearances[index]);
 		}
 
 		//Update crane angle
@@ -200,10 +279,9 @@ class LightingScene extends CGFscene
 
 		//console.log("zDif" + zDif);
 		//console.log("Value -> " + (xDif<2 && zDif<2 && this.speed==0));
-		if(this.forceCrane || (xDif<2 && zDif<2 && this.speed==0)){
+		if(xDif<2 && zDif<2 && this.speed==0){
 			this.crane.update(this.deltaTime);
 			if(this.crane.getCurrentState()==6){
-				this.forceCrane = false;
 				this.crane.setState(0);
 			}
 		}
