@@ -1,3 +1,6 @@
+/**
+ * Class that represents a triangular prism with a 90º angle. Used for the car front and rear windows.
+ */
 class MyTriangularPrism extends CGFobject{
   constructor(scene,stacks,base,height)
   {
@@ -8,6 +11,12 @@ class MyTriangularPrism extends CGFobject{
     this.initBuffers();
   };
 
+    /**
+     * Function that places the vertices, normals and texture coordinates of each stack base.
+     * @param z - The z coordinate of the stack base
+     * @param base - The base of the triangle
+     * @param height - The height of the triangle
+     */
   placeVertexAndNormals(z,base,height){
     this.vertices.push(base,0,z);
     this.normals.push(Math.cos(30*Math.PI/180),Math.sin(30*Math.PI/180),0);
