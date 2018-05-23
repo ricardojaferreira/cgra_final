@@ -148,7 +148,7 @@ class LightingScene extends CGFscene
 		this.currentVehicleAppearance[index] = this.vehicleAppearecesList[index].get(texture1);
 	}
 
-	checkKeys() {
+	checkKeys(deltaTime) {
 		if (this.gui.isKeyPressed("KeyW") && !this.crane.shouldDisplayCar())
 		{
 				if(this.speed<1)
@@ -166,7 +166,7 @@ class LightingScene extends CGFscene
 			if(this.rotation<34){
 					this.rotation+=2;
 			}
-			this.steering+=10*this.speed;
+			this.steering+=this.speed*deltaTime;
 		}
 
 	if(this.keyAPressed && !this.gui.isKeyPressed("KeyA")){
@@ -181,7 +181,7 @@ class LightingScene extends CGFscene
 			if(this.rotation>-34){
 					this.rotation-=2;
 			}
-			this.steering-=10*this.speed;
+			this.steering-=this.speed*deltaTime;
 		}
 
 		if(this.keyDPressed && !this.gui.isKeyPressed("KeyD")){
@@ -242,7 +242,7 @@ class LightingScene extends CGFscene
 		}
 
 		//Update car
-		this.checkKeys();
+		this.checkKeys(this.deltaTime);
 
 		if(this.rotation == 0){
 			this.compensateDirection=false;

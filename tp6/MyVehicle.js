@@ -97,7 +97,7 @@ class MyVehicle extends CGFobject{
 
     let time = deltaTime/50;
 
-    this.car.update(speed*10*time, rotation*degToRad*time);
+    this.car.update(speed*10*time, rotation*degToRad);
     this.xPos+=(Math.cos(steering*degToRad)*speed*time);
     if(this.yPos>0 && this.falling){
       this.yPos-=this.fallingSpeed*time;
