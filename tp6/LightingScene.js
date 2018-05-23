@@ -164,7 +164,9 @@ class LightingScene extends CGFscene
 			this.compensateDirection=false;
 			this.keyAPressed=true;
 			if(this.rotation<34){
-					this.rotation+=0.1*deltaTime;
+					this.rotation+=0.2*deltaTime;
+			} else{
+				this.rotation=34;
 			}
 			this.steering+=0.2*this.speed*deltaTime;
 		}
@@ -179,7 +181,9 @@ class LightingScene extends CGFscene
 			this.compensateDirection=false;
 			this.keyDPressed=true;
 			if(this.rotation>-34){
-					this.rotation-=0.1*deltaTime;
+					this.rotation-=0.2*deltaTime;
+			} else{
+				this.rotation=-34;
 			}
 			this.steering-=0.2*this.speed*deltaTime;
 		}
@@ -245,9 +249,11 @@ class LightingScene extends CGFscene
 		this.checkKeys(this.deltaTime);
 
 
-		console.log("Rotation: " + this.rotation);
+		//console.log("Rotation: " + this.rotation);
+        //console.log("Steering: " + this.steering);
 		if(this.rotation > 0 && this.rotation < 0.2){
 			this.compensateDirection=false;
+			this.rotation=0;
 		}
 
 		if(this.compensateDirection){
