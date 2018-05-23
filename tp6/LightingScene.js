@@ -249,11 +249,10 @@ class LightingScene extends CGFscene
 		this.checkKeys(this.deltaTime);
 
 
-		console.log("Rotation: " + this.rotation);
-        console.log("Steering: " + this.steering);
-		if(this.rotation > 0 && this.rotation < 0.2){
+		if(this.rotation > 0 && this.rotation < 3){
 			this.compensateDirection=false;
 			this.rotation=0;
+			this.steering=Math.round(this.steering);
 		}
 
 		if(this.compensateDirection){
@@ -268,7 +267,6 @@ class LightingScene extends CGFscene
 
 		//prevent speed when crane has the car
 		if(!this.crane.shouldDisplayCar()){
-			this.vehicle.setRotation(this.vehicle.getRotation()+(this.crane.getRotation()));
 			this.craneDisplaysCar = false;
             this.myInterface.speedSlider.domElement.style.pointerEvents = "click";
             this.myInterface.speedSlider.domElement.style.opacity = 1;
@@ -277,8 +275,6 @@ class LightingScene extends CGFscene
             this.myInterface.speedSlider.domElement.style.opacity = .5;
             this.craneDisplaysCar = true;
 		}
-
-		this.vehicles[this.activeVehicle].update(this.deltaTime,this.speed, this.steering, this.rotation);
 
         if(this.vehicles[this.activeVehicle].carDead){
             this.vehicleXPos = -5;
@@ -290,6 +286,8 @@ class LightingScene extends CGFscene
             this.activeVehicle+=1;
 						this.resetTextures();
         }
+
+        this.vehicles[this.activeVehicle].update(this.deltaTime,this.speed, this.steering, this.rotation);
 	}
 
 	resetTextures(){
@@ -415,53 +413,37 @@ class LightingScene extends CGFscene
 
 		// ---- BEGIN Scene drawing section
 
-		//this.pos-=0.1;
-		/*this.pushMatrix();
+		this.pushMatrix();
 			this.terrain.display();
-		this.popMatrix();*/
-
-		// this.pushMatrix();
-         // 	this.translate(15,1.35,15);
-         // 	this.rotate(90*degToRad,0,1,0);
-		// 	this.vehicle.display();
-		// this.popMatrix();
-		// this.vehicle.controlLights(this.luzes);
-
+		this.popMatrix();
 
 		//Display active vehicles
         if(!this.crane.shouldDisplayCar()){
 			this.pushMatrix();
 				this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
-				//this.translate(0,1.35,0);
-				//this.rotate(90*degToRad,0,1,0);
 				this.vehicles[this.activeVehicle].display();
 			this.popMatrix();
-			this.vehicles[this.activeVehicle].controlLights(this.luzes);
         }
 
         this.pushMatrix();
 			this.materialDefault.apply();
 			this.translate(this.craneXpos,this.craneYPos,this.craneZPos);
-        	//this.translate(0,1.3,0);
         	this.rotate(-this.craneRotation,0,1,0);
 			this.crane.display(this.vehicles[this.activeVehicle]);
         this.popMatrix();
 
-      /*  //Display dead vehicles
+      //Display dead vehicles
        for(let i=0; i<this.activeVehicle;i++){
             this.pushMatrix();
-            this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
-            //this.translate(0,1.35,0);
-            //this.rotate(90*degToRad,0,1,0);
-            this.vehicles[i].display();
+				this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
+				this.vehicles[i].display();
             this.popMatrix();
-            //this.vehicles[i].controlLights(this.luzes);
-        }*/
+        }
 
-				this.pushMatrix();
-				this.translate(0,0,30);
-				this.external.display();
-				this.popMatrix();
+        this.pushMatrix();
+       		this.translate(0,0,30);
+       		this.external.display();
+       	this.popMatrix();
 		// ---- END Scene drawing section
 	};
 };
