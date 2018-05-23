@@ -1,3 +1,7 @@
+/**
+ * Class responsible for creating the crane portion after the joint (inclusive).
+ * This is the only part of the crane affected by the joint's rotation.
+ */
 class MyMagnetToJointUnit extends CGFobject{
   constructor(scene){
     super(scene);
@@ -18,6 +22,7 @@ class MyMagnetToJointUnit extends CGFobject{
     this.magnetAndCable = new MyMagnetAndCable(scene);
     this.length = 4;
   }
+  
   display(jointAngle,craneRotation,vehicle,displayCar){
 
     //JOINT

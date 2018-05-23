@@ -1,3 +1,6 @@
+/**
+ * Class that represents a cylinder.
+ */
 class MyCylinder extends CGFobject
 {
   constructor(scene, slices, stacks)
@@ -8,6 +11,10 @@ class MyCylinder extends CGFobject
     this.initBuffers();
   };
 
+    /**
+     * Function that places the vertices, normals and texture coordinates of each stack base.
+     * @param z - The z coordinate of the stack base
+     */
   placeVertexAndNormals(z){
     let ang = 0;
 

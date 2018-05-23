@@ -1,3 +1,6 @@
+/**
+ * Class that represents the 2D trapezoid. 
+ */
 class MyTrapBase extends CGFobject{
   constructor(scene,stacks,regular)
   {
