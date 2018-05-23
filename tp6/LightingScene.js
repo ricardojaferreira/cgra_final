@@ -164,9 +164,9 @@ class LightingScene extends CGFscene
 			this.compensateDirection=false;
 			this.keyAPressed=true;
 			if(this.rotation<34){
-					this.rotation+=2;
+					this.rotation+=0.1*deltaTime;
 			}
-			this.steering+=0.5*this.speed*deltaTime;
+			this.steering+=0.2*this.speed*deltaTime;
 		}
 
 	if(this.keyAPressed && !this.gui.isKeyPressed("KeyA")){
@@ -179,9 +179,9 @@ class LightingScene extends CGFscene
 			this.compensateDirection=false;
 			this.keyDPressed=true;
 			if(this.rotation>-34){
-					this.rotation-=2;
+					this.rotation-=0.1*deltaTime;
 			}
-			this.steering-=0.5*this.speed*deltaTime;
+			this.steering-=0.2*this.speed*deltaTime;
 		}
 
 		if(this.keyDPressed && !this.gui.isKeyPressed("KeyD")){
@@ -244,17 +244,19 @@ class LightingScene extends CGFscene
 		//Update car
 		this.checkKeys(this.deltaTime);
 
-		if(this.rotation == 0){
+
+		console.log("Rotation: " + this.rotation);
+		if(this.rotation > 0 && this.rotation < 0.2){
 			this.compensateDirection=false;
 		}
 
 		if(this.compensateDirection){
 			if(this.rotation>0){
-				this.rotation-=2;
-				this.steering+=10*this.speed;
+				this.rotation-=0.1*this.deltaTime;
+				this.steering-=0.1*this.speed*this.deltaTime;
 			} else {
-				this.rotation+=2;
-				this.steering-=10*this.speed;
+				this.rotation+=0.1*this.deltaTime;
+				this.steering+=0.1*this.speed*this.deltaTime;
 			}
 		}
 
