@@ -3,6 +3,7 @@ Final Project for Computer Graphics
 
 ### TODO
 
+- [ ] Espelhos no carro
 - [X] Meter fora de cena os elementos
 - [X] MyPlane tem textura repeat activa? Certificar
 - [X] FPS afectam o controlo do carro?
