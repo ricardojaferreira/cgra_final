@@ -72,7 +72,7 @@ class MyInterface extends CGFinterface {
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-		this.speedSlider = this.gui.add(this.scene, 'speed', -1, 1).listen();
+		this.speedSlider = this.gui.add(this.scene, 'speed', -0.5, 0.5).listen();
 
 
     this.initKeys();

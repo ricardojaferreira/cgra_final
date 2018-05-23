@@ -151,12 +151,12 @@ class LightingScene extends CGFscene
 	checkKeys(deltaTime) {
 		if (this.gui.isKeyPressed("KeyW") && !this.crane.shouldDisplayCar())
 		{
-				if(this.speed<1)
+				if(this.speed<0.5)
 						this.speed+=0.01;
 		}
 		if (this.gui.isKeyPressed("KeyS") && !this.crane.shouldDisplayCar())
 		{
-				if(this.speed>-1)
+				if(this.speed>-0.5)
 					this.speed-=0.01;
 		}
 		if (this.gui.isKeyPressed("KeyA"))
@@ -166,7 +166,7 @@ class LightingScene extends CGFscene
 			if(this.rotation<34){
 					this.rotation+=2;
 			}
-			this.steering+=this.speed*deltaTime;
+			this.steering+=0.5*this.speed*deltaTime;
 		}
 
 	if(this.keyAPressed && !this.gui.isKeyPressed("KeyA")){
@@ -181,7 +181,7 @@ class LightingScene extends CGFscene
 			if(this.rotation>-34){
 					this.rotation-=2;
 			}
-			this.steering-=this.speed*deltaTime;
+			this.steering-=0.5*this.speed*deltaTime;
 		}
 
 		if(this.keyDPressed && !this.gui.isKeyPressed("KeyD")){
