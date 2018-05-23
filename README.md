@@ -6,11 +6,11 @@ Final Project for Computer Graphics
 - [X] Meter fora de cena os elementos
 - [X] MyPlane tem textura repeat activa? Certificar
 - [X] FPS afectam o controlo do carro?
-- [ ] FPS afectam o desenho do carro no guindaste. Perceber porquê.
+- [X] FPS afectam o desenho do carro no guindaste. Perceber porquê.
 - [X] Mexer em mais texturas através de opções
 - [X] Funciona para diferentes nrDivs certo?
 - [X] Textura no guindaste, e na plataforma
-- [ ] Corrigir desvio quando o carro faz attach
+- [X] Corrigir desvio quando o carro faz attach
 - [X] Animação de queda do carro
 - [X] Inibir aceleração quando carro está no guindaste
 - [X] Verificar a iluminação da cena
@@ -24,3 +24,4 @@ Final Project for Computer Graphics
 
 - [ ] Colocar a animação do carro a cair mais rápida?
 - [ ] Quando se adiciona um novo carro (após a queda do primeiro) deixa de ser possível alterar o slider da velocidade com o rato 
+- [ ] MyPlane tem as normais erradas porque não está a contar com os angulos...
