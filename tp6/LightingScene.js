@@ -269,7 +269,7 @@ class LightingScene extends CGFscene
             this.craneDisplaysCar = true;
 		}
 
-		this.vehicles[this.activeVehicle].update(this.speed, this.steering, this.rotation);
+		this.vehicles[this.activeVehicle].update(this.deltaTime,this.speed, this.steering, this.rotation);
 
         if(this.vehicles[this.activeVehicle].carDead){
             this.vehicleXPos = -5;
