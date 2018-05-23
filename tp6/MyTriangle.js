@@ -1,3 +1,6 @@
+/**
+ * Class that represents a triangle.
+ */
 class MyTriangle extends CGFobject{
   constructor(scene,base,height)
   {
