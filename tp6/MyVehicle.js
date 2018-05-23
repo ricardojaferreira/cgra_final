@@ -34,6 +34,7 @@ class MyVehicle extends CGFobject{
     this.zPos = 0;
 
     this.steering=0;
+    this.fallingSpeed = 0.5;
 
     this.rotate=false;
     this.falling=false;
@@ -99,7 +100,7 @@ class MyVehicle extends CGFobject{
     this.car.update(speed*10*time, rotation*degToRad*time);
     this.xPos+=(Math.cos(steering*degToRad)*speed*time);
     if(this.yPos>0 && this.falling){
-      this.yPos-=0.1;
+      this.yPos-=this.fallingSpeed*time;
     }
     this.zPos+=(Math.sin(steering*degToRad)*speed*time);
     this.steering = steering*degToRad;
@@ -116,8 +117,6 @@ class MyVehicle extends CGFobject{
   display(){
     //this.scene.lights[5].setPosition(2.3+this.xPos, 1.3, 0.8+this.zPos, 1.0);
     //this.scene.lights[6].setPosition(2.3+this.xPos, 1.3, -0.8+this.zPos, 1.0);
-
-
     this.scene.pushMatrix();
       this.scene.translate(this.xPos,this.yPos,-this.zPos);
       this.scene.rotate(this.steering, 0,1,0);

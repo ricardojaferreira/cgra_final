@@ -45,7 +45,7 @@ class MyCrane extends CGFobject{
     this.baseAngle = baseAngle;
   }
 
-  releaseVehicle(vehicle, vehicleRot){
+  releaseVehicle(vehicle){
     vehicle.setXpos(this.xPos-this.liftPlatformZpos+4);
     vehicle.setYpos(this.yPos+5);
     vehicle.setZpos(this.zPos+0.5);

@@ -236,7 +236,7 @@ class LightingScene extends CGFscene
 		if(xDif<2 && zDif<2 && this.speed==0){
 			this.crane.update(this.deltaTime);
 			if(this.crane.getCurrentState()==6){
-                this.crane.releaseVehicle(this.vehicles[this.activeVehicle], this.steering);
+                this.crane.releaseVehicle(this.vehicles[this.activeVehicle]);
 				this.crane.setState(0);
 			}
 		}
