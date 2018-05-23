@@ -1,9 +1,3 @@
-/**
- * MyObject
- * @param gl {WebGLRenderingContext}
- * @constructor
- */
-
 class MyQuad extends CGFobject
 {
 	constructor(scene, minS, maxS, minT, maxT)
