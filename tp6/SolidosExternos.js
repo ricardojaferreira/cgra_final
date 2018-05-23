@@ -80,7 +80,6 @@ class SolidosExternos extends CGFobject{
     //Irregular MyTrapezoid
     this.scene.pushMatrix();
       this.scene.translate(0,0,5);
-      //this.scene.rotate(180*Math.PI/180,0,1,0);
       this.trapTexture.apply();
       this.irregularTrap.display();
     this.scene.popMatrix();
@@ -88,7 +87,6 @@ class SolidosExternos extends CGFobject{
     //Trapezoid base1
     this.scene.pushMatrix();
       this.scene.translate(0,0,5);
-      //this.scene.rotate(180*Math.PI/180,0,1,0);
       this.trapTexture.apply();
       this.irregularTrapBase.display();
     this.scene.popMatrix();
@@ -96,7 +94,6 @@ class SolidosExternos extends CGFobject{
     //Trapezoid base2
     this.scene.pushMatrix();
       this.scene.translate(0,0,6);
-      //this.scene.rotate(180*Math.PI/180,0,1,0);
       this.trapTexture.apply();
       this.irregularTrapBase.display();
     this.scene.popMatrix();
@@ -105,7 +102,6 @@ class SolidosExternos extends CGFobject{
     //Regular MyTrapezoid
     this.scene.pushMatrix();
       this.scene.translate(5,0,5);
-      //this.scene.rotate(180*Math.PI/180,0,1,0);
       this.trapTexture.apply();
       this.regularTrap.display();
     this.scene.popMatrix();
@@ -121,7 +117,6 @@ class SolidosExternos extends CGFobject{
     //Trapezoid base2
     this.scene.pushMatrix();
       this.scene.translate(5,0,6);
-      //this.scene.rotate(180*Math.PI/180,0,1,0);
       this.trapTexture.apply();
       this.regularTrapBase.display();
     this.scene.popMatrix();
