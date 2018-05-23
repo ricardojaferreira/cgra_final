@@ -1,5 +1,3 @@
-//let degToRad = Math.PI / 180.0;
-
 var degToRad = Math.PI / 180.0;
 
 class MyChassis extends CGFobject{
