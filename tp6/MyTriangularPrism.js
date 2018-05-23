@@ -13,22 +13,22 @@ class MyTriangularPrism extends CGFobject{
     this.normals.push(Math.cos(30*Math.PI/180),Math.sin(30*Math.PI/180),0);
     this.texCoords.push(0,z);
 
-    this.vertices.push(0,height,z);
-    this.normals.push(Math.cos(30*Math.PI/180),Math.sin(30*Math.PI/180),0);
-    this.texCoords.push(1/3,z);
+    let ang = 30;
 
-    this.vertices.push(0,height,z);
-    this.normals.push(Math.cos(180*Math.PI/180),Math.sin(180*Math.PI/180),0);
-    this.texCoords.push(1.3,z);
+    for(let i=0; i<2; i++){
+      this.vertices.push(0,height,z);
+      this.normals.push(Math.cos(ang*Math.PI/180),Math.sin(ang*Math.PI/180),0);
+      this.texCoords.push(1/3,z);
+      ang +=150;
+    }
 
-    this.vertices.push(0,0,z);
-    this.normals.push(Math.cos(180*Math.PI/180),Math.sin(180*Math.PI/180),0);
-    this.texCoords.push(2/3,z);
-
-    this.vertices.push(0,0,z);
-    this.normals.push(Math.cos(270*Math.PI/180),Math.sin(270*Math.PI/180),0);
-    this.texCoords.push(2/3,z);
-
+    for(let i=0; i<2; i++){
+      this.vertices.push(0,0,z);
+      this.normals.push(Math.cos(ang*Math.PI/180),Math.sin(ang*Math.PI/180),0);
+      this.texCoords.push(2/3,z);
+      ang +=90;
+    }
+    
     this.vertices.push(base,0,z);
     this.normals.push(Math.cos(270*Math.PI/180),Math.sin(270*Math.PI/180),0);
     this.texCoords.push(1,z);
@@ -52,7 +52,7 @@ class MyTriangularPrism extends CGFobject{
         index+=2
       }
     }
-    
+
     this.primitiveType=this.scene.gl.TRIANGLES;
     this.initGLBuffers();
   };
