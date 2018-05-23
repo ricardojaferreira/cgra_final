@@ -90,14 +90,18 @@ class MyVehicle extends CGFobject{
     this.steering = rotation;
   }
 
-  update(speed, steering, rotation){
+  update(deltaTime, speed, steering, rotation){
+    if(deltaTime>10000)
+      return;
 
-    this.car.update(speed*10, rotation*degToRad);
-    this.xPos+=(Math.cos(steering*degToRad)*speed);
+    let time = deltaTime/50;
+
+    this.car.update(speed*10*time, rotation*degToRad*time);
+    this.xPos+=(Math.cos(steering*degToRad)*speed*time);
     if(this.yPos>0 && this.falling){
       this.yPos-=0.1;
     }
-    this.zPos+=(Math.sin(steering*degToRad)*speed);
+    this.zPos+=(Math.sin(steering*degToRad)*speed*time);
     this.steering = steering*degToRad;
     if(this.rotate){
       this.steering+=(180*degToRad);
