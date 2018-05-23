@@ -58,26 +58,21 @@ class MyMagnetToJointUnit extends CGFobject{
     let y = Math.sin((45-jointAngle)*Math.PI/180)*d;
     let z = Math.cos((45-jointAngle)*Math.PI/180)*d;
     this.scene.pushMatrix();
-          //this.scene.translate(0,0,-(this.length-0.7));
           this.scene.rotate(-jointAngle*Math.PI/180,1,0,0);
           this.scene.rotate(-jointAngle*Math.PI/180,1,0,0);
           this.scene.translate(0,-y,-z);
           this.scene.rotate(jointAngle*Math.PI/180,1,0,0);
           this.scene.translate(0,y,z);
           this.scene.translate(0,0,this.length-0.7);
-          //this.scene.rotate(-1*jointAngle*Math.PI/180,1,0,0);
-          this.magnetAndCable.display();
-          if(displayCar){
 
+          this.magnetAndCable.display();
+
+          if(displayCar){
             this.scene.pushMatrix();
               this.scene.rotate(90*Math.PI/180,0,1,0);
-              //this.scene.translate(vehicle.getXpos()+0.5,vehicle.getYpos(),-vehicle.getZpos());
-              //vehicle.setRotation(vehicle.getRotation()-(180*Math.PI/180));
-              //vehicle.setRotation(vehicle.getRotation()+(craneRotation));
-              //this.scene.translate(vehicle.getXpos()+5,vehicle.getYpos()-1.3,vehicle.getZpos()-15);
-              //this.scene.translate((10+4)*Math.cos(45*Math.PI/180),-1.3,(10+4)*Math.cos(45*Math.PI/180)+10*Math.cos(45*Math.PI/180));
               this.scene.translate(-this.vehicleXOffset+(10+4)*Math.cos(45*Math.PI/180)+this.craneXoffset,-1.3,-this.vehicleZoffset+this.craneZoffset);
               this.scene.rotate(180*Math.PI/180,0,1,0);
+
               vehicle.display();
             this.scene.popMatrix();
           }
