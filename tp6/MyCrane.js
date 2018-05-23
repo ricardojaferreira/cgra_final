@@ -147,4 +147,8 @@ class MyCrane extends CGFobject{
     return this.RZPosition;
   }
 
+  getRotation(){
+    return this.rotation;
+  }
+
 }

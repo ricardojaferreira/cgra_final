@@ -260,6 +260,7 @@ class LightingScene extends CGFscene
 
 		//prevent speed when crane has the car
 		if(!this.crane.shouldDisplayCar()){
+			this.vehicle.setRotation(this.vehicle.getRotation()+(this.crane.getRotation()));
 			this.craneDisplaysCar = false;
             this.myInterface.speedSlider.domElement.style.pointerEvents = "click";
             this.myInterface.speedSlider.domElement.style.opacity = 1;
@@ -269,7 +270,7 @@ class LightingScene extends CGFscene
             this.craneDisplaysCar = true;
 		}
 
-		this.vehicles[this.activeVehicle].update(this.deltaTime, this.speed, this.steering, this.rotation);
+		this.vehicles[this.activeVehicle].update(this.deltaTime,this.speed, this.steering, this.rotation);
 
         if(this.vehicles[this.activeVehicle].carDead){
             this.vehicleXPos = -5;
@@ -279,7 +280,21 @@ class LightingScene extends CGFscene
             let v = new MyVehicle(this);
             this.vehicles.push(v);
             this.activeVehicle+=1;
+						this.resetTextures();
         }
+	}
+
+	resetTextures(){
+		this.textures[0] = this.Body;
+		this.textures[1] = this.Windows;
+		this.textures[2] = this.Wheels;
+		this.textures[3] = this.Headlights;
+
+		for(let i=0; i<this.textures.length; i++){
+			let index = this.vehicleAppearecesList[i].get(this.textures[i]);
+			this.currentVehicleAppearance[i] = index;
+			this.vehicles[this.activeVehicle].updateCarTexture(this.textureMap.get(i),this.vehicleAppearances[i][index]);
+		}
 	}
 
 	initCameras()
@@ -393,9 +408,9 @@ class LightingScene extends CGFscene
 		// ---- BEGIN Scene drawing section
 
 		//this.pos-=0.1;
-		this.pushMatrix();
+		/*this.pushMatrix();
 			this.terrain.display();
-		this.popMatrix();
+		this.popMatrix();*/
 
 		// this.pushMatrix();
          // 	this.translate(15,1.35,15);
@@ -406,7 +421,7 @@ class LightingScene extends CGFscene
 
 
 		//Display active vehicles
-        if(!this.craneDisplaysCar){
+        if(!this.crane.shouldDisplayCar()){
 			this.pushMatrix();
 				this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
 				//this.translate(0,1.35,0);
@@ -424,7 +439,7 @@ class LightingScene extends CGFscene
 			this.crane.display(this.vehicles[this.activeVehicle]);
         this.popMatrix();
 
-        //Display dead vehicles
+      /*  //Display dead vehicles
        for(let i=0; i<this.activeVehicle;i++){
             this.pushMatrix();
             this.translate(this.vehicleXPos,this.vehicleYpos,this.vehicleZPos);
@@ -433,7 +448,7 @@ class LightingScene extends CGFscene
             this.vehicles[i].display();
             this.popMatrix();
             //this.vehicles[i].controlLights(this.luzes);
-        }
+        }*/
 
 				this.pushMatrix();
 				this.translate(0,0,30);

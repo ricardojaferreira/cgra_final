@@ -70,10 +70,10 @@ class MyMagnetToJointUnit extends CGFobject{
           if(displayCar){
 
             this.scene.pushMatrix();
+              this.scene.rotate(90*Math.PI/180,0,1,0);
               //this.scene.translate(vehicle.getXpos()+0.5,vehicle.getYpos(),-vehicle.getZpos());
-              //this.scene.rotate(vehicle.getRotation(), 0,1,0);
               //vehicle.setRotation(vehicle.getRotation()-(180*Math.PI/180));
-              vehicle.setRotation(vehicle.getRotation()+(craneRotation));
+              //vehicle.setRotation(vehicle.getRotation()+(craneRotation));
               //this.scene.translate(vehicle.getXpos()+5,vehicle.getYpos()-1.3,vehicle.getZpos()-15);
               //this.scene.translate((10+4)*Math.cos(45*Math.PI/180),-1.3,(10+4)*Math.cos(45*Math.PI/180)+10*Math.cos(45*Math.PI/180));
               this.scene.translate(-this.vehicleXOffset+(10+4)*Math.cos(45*Math.PI/180)+this.craneXoffset,-1.3,-this.vehicleZoffset+this.craneZoffset);
