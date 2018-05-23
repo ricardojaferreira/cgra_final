@@ -1,4 +1,12 @@
+/**
+ * Class responsible for creating and displaying all the elements required for the car and their corresponding textures.
+ */
 class SolidosExternos extends CGFobject{
+
+  /**
+     * Constructor of class. Creates all the elements and their corresponding textures.
+     * @param scene - The project scene
+     */
   constructor(scene)
   {
     super(scene);
@@ -37,7 +45,7 @@ class SolidosExternos extends CGFobject{
 		this.trapTexture.setShininess(120);
     this.trapTexture.loadTexture('../resources/images/parachoque.jpg');
   }
-
+  
   display(){
     //Sphere
     this.scene.pushMatrix();
