@@ -25,4 +25,3 @@ Final Project for Computer Graphics
 
 - [ ] Colocar a animação do carro a cair mais rápida?
 - [ ] Quando se adiciona um novo carro (após a queda do primeiro) deixa de ser possível alterar o slider da velocidade com o rato 
-- [ ] MyPlane tem as normais erradas porque não está a contar com os angulos...
