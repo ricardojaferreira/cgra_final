@@ -1,3 +1,6 @@
+/**
+ * Class responsible for creating the last portion of the crane - the magnet and its cable.
+ */
 class MyMagnetAndCable extends CGFobject{
   constructor(scene){
     super(scene);
