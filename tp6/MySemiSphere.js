@@ -1,3 +1,6 @@
+/**
+ * Class that represents a semi sphere.
+ */
 class MySemiSphere extends CGFobject
 {
   constructor(scene, slices, stacks)
@@ -8,6 +11,11 @@ class MySemiSphere extends CGFobject
     this.initBuffers();
   };
 
+    /**
+     * Function that places the vertices, normals and texture coordinates of each stack base.
+     * @param z - The z coordinate of the stack base
+     * @param c2 - The radius of the stack base
+     */
   placeVertexAndNormals(z,c2){
     let ang = 0;
 
