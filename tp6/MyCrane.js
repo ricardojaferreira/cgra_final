@@ -1,4 +1,15 @@
+/**
+ * Class that represents the crane and its pick-up platform.
+ */
 class MyCrane extends CGFobject{
+    /**
+     * Constructor of the crane Class.
+     * @param scene - The scene of the project.
+     * @param xPos - The x coordinate
+     * @param yPos - The y coordinate
+     * @param zPos - The z coordinate
+     * @param rotation - The initial rotation
+     */
   constructor(scene, xPos, yPos, zPos, rotation){
     super(scene);
 
@@ -21,30 +32,26 @@ class MyCrane extends CGFobject{
 
     this.liftPlatformZpos = (10+4)*Math.cos(45*Math.PI/180);
 
-    // this.RXPosition = this.xPos;
-    // this.RZPosition = this.liftPlatformZpos + this.zPos;
-
-      this.RXPosition = this.liftPlatformZpos*(Math.sin(this.rotation)) + this.xPos;
-      this.RZPosition = this.liftPlatformZpos*(Math.cos(-this.rotation)) + this.zPos;
+    this.RXPosition = this.liftPlatformZpos*(Math.sin(this.rotation)) + this.xPos;
+    this.RZPosition = this.liftPlatformZpos*(Math.cos(-this.rotation)) + this.zPos;
 
     this.state = 0;
 
     //Lift Platform
-      this.liftPlatform = new MyPlatform(scene);
+    this.liftPlatform = new MyPlatform(scene);
 
-      this.platformTexture = new CGFappearance(scene);
-      this.platformTexture.setAmbient(0.8,0.8,0.8,1);
-      this.platformTexture.setDiffuse(0.8,0.8,0.8,1);
-      this.platformTexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
-      this.platformTexture.setShininess(60);
-      this.platformTexture.loadTexture('../resources/images/platform.jpg');
+    this.platformTexture = new CGFappearance(scene);
+    this.platformTexture.setAmbient(0.8,0.8,0.8,1);
+    this.platformTexture.setDiffuse(0.8,0.8,0.8,1);
+    this.platformTexture.setSpecular(0.1,0.1,0.1,1);
+    this.platformTexture.setShininess(60);
+    this.platformTexture.loadTexture('../resources/images/platform.jpg');
   }
 
-  setAngles(jointAngle, baseAngle){
-    this.baseToJointUnit.setAngle(jointAngle);
-    this.baseAngle = baseAngle;
-  }
-
+    /**
+     * Function that defines the coordinates for the vehicle to start falling.
+     * @param vehicle - The current vehicle
+     */
   releaseVehicle(vehicle){
     vehicle.setXpos(this.xPos-this.liftPlatformZpos+4);
     vehicle.setYpos(this.yPos+5);
@@ -54,6 +61,11 @@ class MyCrane extends CGFobject{
     this.displayCar=false;
   }
 
+    /**
+     * Deals with the crane animation. Implemented with a state machine with 6 states.
+     * Uses the time elapsed since the last update call.
+     * @param deltaTime - time elapsed since the last update
+     */
   update(deltaTime){
     if(deltaTime>100000)
       return;
@@ -96,6 +108,11 @@ class MyCrane extends CGFobject{
 
   }
 
+    /**
+     * Lowers the arm and its magnet towards the car.
+     * @param deltaTime - The time elapsed since the last update
+     * @param nextState - The value of the following state
+     */
   gotoMaxJointAngle(deltaTime, nextState){
     let angle = this.baseToJointUnit.getAngle()+(this.animationSpeed)*(360/60);
     if(angle<this.jointMaxAngle)
@@ -104,6 +121,11 @@ class MyCrane extends CGFobject{
       this.state = nextState;
   }
 
+    /**
+     * Raises the arm and its magnet toward the initial position.
+     * @param deltaTime - The time elapsed since the last update
+     * @param nextState - The value of the following state
+     */
   gotoMinJointAngle(deltaTime, nextState){
     let angle = this.baseToJointUnit.getAngle()-(this.animationSpeed)*(360/60);
     if(angle>this.jointMinAngle)
@@ -118,7 +140,6 @@ class MyCrane extends CGFobject{
       this.platformTexture.apply();
       this.liftPlatform.display();
     this.scene.popMatrix();
-
 
     //MyBaseToJointUnit
     this.scene.pushMatrix();
