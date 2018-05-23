@@ -1,3 +1,6 @@
+/**
+ * Class that represents a cube.
+ */
 class MyUnitCubeQuad extends CGFobject{
   constructor(scene, minS, maxS, minT, maxT)
   {
