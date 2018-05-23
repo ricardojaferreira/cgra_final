@@ -168,7 +168,7 @@ class LightingScene extends CGFscene
 			} else{
 				this.rotation=34;
 			}
-			this.steering+=0.2*this.speed*deltaTime;
+			this.steering+=0.3*this.speed*deltaTime;
 		}
 
 	if(this.keyAPressed && !this.gui.isKeyPressed("KeyA")){
@@ -185,7 +185,7 @@ class LightingScene extends CGFscene
 			} else{
 				this.rotation=-34;
 			}
-			this.steering-=0.2*this.speed*deltaTime;
+			this.steering-=0.3*this.speed*deltaTime;
 		}
 
 		if(this.keyDPressed && !this.gui.isKeyPressed("KeyD")){
@@ -249,8 +249,8 @@ class LightingScene extends CGFscene
 		this.checkKeys(this.deltaTime);
 
 
-		//console.log("Rotation: " + this.rotation);
-        //console.log("Steering: " + this.steering);
+		console.log("Rotation: " + this.rotation);
+        console.log("Steering: " + this.steering);
 		if(this.rotation > 0 && this.rotation < 0.2){
 			this.compensateDirection=false;
 			this.rotation=0;
@@ -259,10 +259,10 @@ class LightingScene extends CGFscene
 		if(this.compensateDirection){
 			if(this.rotation>0){
 				this.rotation-=0.1*this.deltaTime;
-				this.steering-=0.1*this.speed*this.deltaTime;
+				this.steering-=0.2*this.speed*this.deltaTime;
 			} else {
 				this.rotation+=0.1*this.deltaTime;
-				this.steering+=0.1*this.speed*this.deltaTime;
+				this.steering+=0.2*this.speed*this.deltaTime;
 			}
 		}
 
