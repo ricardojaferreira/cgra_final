@@ -257,11 +257,11 @@ class LightingScene extends CGFscene
 
 		if(this.compensateDirection){
 			if(this.rotation>0){
-				this.rotation-=0.1*this.deltaTime;
-				this.steering-=0.2*this.speed*this.deltaTime;
+				this.rotation-=0.2*this.deltaTime;
+				this.steering-=0.1*this.speed*this.deltaTime;
 			} else {
-				this.rotation+=0.1*this.deltaTime;
-				this.steering+=0.2*this.speed*this.deltaTime;
+				this.rotation+=0.2*this.deltaTime;
+				this.steering+=0.1*this.speed*this.deltaTime;
 			}
 		}
 
