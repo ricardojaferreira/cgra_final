@@ -5,9 +5,9 @@ class MyWheel extends CGFobject{
      * Uses one object of type MyCylinder to create the tyre.
      * Uses two object of type MyCircle one to create the rim and another to create the interior.
      * All objects have an applied texture.
-     * @param scene The project scene
-     * @param slices The number of slices used to create the cylinder
-     * @param stacks The number of stacks to create the cylinder
+     * @param scene - The project scene
+     * @param slices - The number of slices used to create the cylinder
+     * @param stacks - The number of stacks to create the cylinder
      */
   constructor(scene, slices, stacks)
   {

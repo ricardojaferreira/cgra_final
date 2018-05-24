@@ -1,4 +1,13 @@
 class MyBackWheels extends CGFobject{
+
+    /**
+     * The constructor of class.
+     * This class creates the two back wheels plus the axys between them.
+     * Two objects MyWheel for the wheels and one object MyAxis for the axis.
+     * @param scene - The project scene
+     * @param slices - The number of slices used to create the cylinder
+     * @param stacks - The number of stacks to create the cylinder
+     */
   constructor(scene, slices, stacks)
   {
     super(scene);
@@ -9,6 +18,10 @@ class MyBackWheels extends CGFobject{
     this.rAxis = new MyAxis(scene,slices,stacks);
   };
 
+    /**
+     * Updates the texture of the wheels with the dat.gui interface
+     * @param texture - The texture to apply
+     */
   updateTexture(texture){
     this.blWheel.updateTexture(texture);
     this.brWheel.updateTexture(texture);
