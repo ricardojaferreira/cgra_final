@@ -1,3 +1,6 @@
+/**
+ * Class that represents the pick-up platform of the crane.
+ */
 class MyPlatform extends CGFobject{
     constructor(scene)
     {
