@@ -1,5 +1,13 @@
 class MyTerrain extends CGFobject{
 
+    /**
+     * The constructor of class.
+     * Creates the terrain of the scene using the class Plane passing to this class the number of divisions of the grid
+     * and one altimetry matrix to create zones with diferent heights
+     * @param scene - The project scene
+     * @param nrDivs - Number of divisions
+     * @param altimetry - Altimetry Matrix
+     */
     constructor(scene, nrDivs, altimetry)
     {
         super(scene);

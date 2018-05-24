@@ -82,9 +82,6 @@ class LightingScene extends CGFscene
         this.luz3 = true;
         this.luz4 = true;
 
-        //Vehicle
-        this.luzes = false;
-
         //options
         this.showAxis=true;
 

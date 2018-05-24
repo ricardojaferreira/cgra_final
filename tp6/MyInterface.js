@@ -46,7 +46,6 @@ class MyInterface extends CGFinterface {
     //vehicle options
     var vehicle = this.gui.addFolder('Vehicle');
     vehicle.open();
-    vehicle.add(this.scene, 'luzes');
     let textures = vehicle.addFolder('Textures');
 		textures.add(this.scene, 'Body', ["redbull", "dakar"] );
     textures.add(this.scene, 'Windows', ["glass", "magnet"] );
