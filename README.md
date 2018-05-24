@@ -3,7 +3,7 @@ Final Project for Computer Graphics
 
 ### TODO
 
-- [ ] Espelhos no carro
+- [X] Espelhos no carro
 - [X] Meter fora de cena os elementos
 - [X] MyPlane tem textura repeat activa? Certificar
 - [X] FPS afectam o controlo do carro?
@@ -15,13 +15,10 @@ Final Project for Computer Graphics
 - [X] Animação de queda do carro
 - [X] Inibir aceleração quando carro está no guindaste
 - [X] Verificar a iluminação da cena
-- [ ] Limpar variáveis e partes do código que não estão a ser utilizados
+- [X] Limpar variáveis e partes do código que não estão a ser utilizados
 
-### Extras
-
-- [ ] Luzes no carro
 
 ### BUGS ou Correcções
 
-- [ ] Colocar a animação do carro a cair mais rápida?
+- [X] Colocar a animação do carro a cair mais rápida?
 - [ ] Quando se adiciona um novo carro (após a queda do primeiro) deixa de ser possível alterar o slider da velocidade com o rato 
