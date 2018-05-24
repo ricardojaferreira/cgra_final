@@ -64,8 +64,6 @@ class MyInterface extends CGFinterface {
 		// e.g. this.option1=true; this.option2=false;
 
     group.add(this.scene, 'showAxis');
-		group.add(this.scene, 'option1');
-		group.add(this.scene, 'option2');
 
 		// add a slider
 		// must be a numeric variable of the scene, initialized in scene.init e.g.
