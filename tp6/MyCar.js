@@ -3,7 +3,7 @@ class MyCar extends CGFobject{
   {
     super(scene);
 
-    this.lamp = new MySemiSphere(scene,16,16);
+    this.sphere = new MySemiSphere(scene,16,16);
     this.paraChoques = new MyTrapezoid(scene,6,0);
     this.wheelSocket = new MyTrapezoid(scene,6,1);
     this.lowerPart = new MyUnitCubeQuad(scene,0,1,0,1);
@@ -48,6 +48,11 @@ class MyCar extends CGFobject{
 
   };
 
+    /**
+     * Changes the current vehicle textures by the selected on the dropdown menu.
+     * @param part - Name of the part that will be changed
+     * @param texture - Texture that should be changed to
+     */
   updateTexture(part,texture){
     if(part=="Body")
       this.roofTexture = texture;
@@ -57,10 +62,13 @@ class MyCar extends CGFobject{
       this.chassis.updateTexture(texture);
     else if(part=="Headlights")
       this.lampTexture = texture;
-
-
   }
 
+    /**
+     * Informs the class that simulates the wheels about the new speed and steering angle.
+     * @param speed - The new speed
+     * @param steering - The new steering angle
+     */
   update(speed, steering){
     this.chassis.update(steering, speed);
   }
@@ -132,7 +140,7 @@ class MyCar extends CGFobject{
       this.scene.rotate(90*Math.PI/180,0,1,0);
       this.scene.scale(0.25, 0.25, 0.25);
       this.roofTexture.apply();
-      this.lamp.display();
+      this.sphere.display();
       this.scene.pushMatrix();
         this.scene.rotate(180*Math.PI/180,0,1,0);
         this.glassTexture.apply();
@@ -146,7 +154,7 @@ class MyCar extends CGFobject{
     this.scene.rotate(90*Math.PI/180,0,1,0);
     this.scene.scale(0.25, 0.25, 0.25);
     this.roofTexture.apply();
-    this.lamp.display();
+    this.sphere.display();
     this.scene.pushMatrix();
       this.scene.rotate(180*Math.PI/180,0,1,0);
       this.glassTexture.apply();
@@ -263,7 +271,7 @@ class MyCar extends CGFobject{
       this.scene.rotate(90*Math.PI/180,0,1,0);
       this.scene.scale(0.25, 0.25, 0.25);
         this.lampTexture.apply();
-        this.lamp.display();
+        this.sphere.display();
     this.scene.popMatrix();
 
     //RIGHT LAMP
@@ -272,7 +280,7 @@ class MyCar extends CGFobject{
       this.scene.rotate(90*Math.PI/180,0,1,0);
       this.scene.scale(0.25, 0.25, 0.25);
         this.lampTexture.apply();
-        this.lamp.display();
+        this.sphere.display();
     this.scene.popMatrix();
 
     //WHEELS AND AXIS

@@ -1,3 +1,6 @@
+/**
+ * Class that represents a circle.
+ */
 class MyCircle extends CGFobject
 {
   constructor(scene, slices, minS, maxS, minT, maxT)
@@ -11,6 +14,10 @@ class MyCircle extends CGFobject
     this.initBuffers();
   };
 
+    /**
+     * Function that places the vertices, normals and texture coordinates of the circle.
+     * @param z - The z coordinate of the stack base
+     */
   placeVertNormals(z){
     let ang = 0;
     for(let i=0;i<this.slices;i++){
