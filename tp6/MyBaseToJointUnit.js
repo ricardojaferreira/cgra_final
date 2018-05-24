@@ -1,3 +1,6 @@
+/**
+ * Class that represents the crane from its base to the joint.
+ */
 class MyBaseToJointUnit extends CGFobject{
   constructor(scene){
     super(scene);
