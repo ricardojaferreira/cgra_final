@@ -1,4 +1,14 @@
 class MyAxis extends CGFobject{
+
+    /**
+     * The constructor of class.
+     * This class creates an axis to be applied between the wheels of the car.
+     * It uses one class MyCylinder to create the axis.
+     * It also sets one texture to apply to this class.
+     * @param scene - The project scene
+     * @param slices - The number of slices used to create the cylinder
+     * @param stacks - The number of stacks to create the cylinder
+     */
   constructor(scene, slices, stacks)
   {
     super(scene);

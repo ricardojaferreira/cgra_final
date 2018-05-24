@@ -2,7 +2,7 @@
 /** Represents a plane with nrDivs divisions along both axis, with center at (0,0) */
 class Plane extends CGFobject{
 
-	constructor(scene, nrDivs, altimetry)
+	constructor(scene, nrDivs, altimetry, minS, maxS, minT, maxT)
 	{
 		super(scene);
 
@@ -12,27 +12,20 @@ class Plane extends CGFobject{
 		this.nrDivs = nrDivs;
 		this.patchLength = 1.0 / nrDivs;
 		this.altimetry = altimetry;
+		this.minS = minS;
+		this.maxS = maxS;
+		this.minT = minT;
+		this.maxT = maxT;
 
 		this.initBuffers();
 	};
 
 	initBuffers()
 	{
-		/* example for nrDivs = 3 :
-		(numbers represent index of point in vertices array)
-
-				y
-				^
-				|
-		0    1  |  2    3
-				|
-		4	 5	|  6    7
-		--------|--------------> x
-		8    9  |  10  11
-				|
-		12  13  |  14  15
-
-		*/
+		let s = this.minS;
+		let t = this.minT;
+		let sInc = (this.maxS-this.minS)/this.nrDivs;
+		let tInc = (this.maxT-this.minT)/this.nrDivs;
 
 		// Generate vertices and normals
 		this.vertices = [];
@@ -53,17 +46,17 @@ class Plane extends CGFobject{
 				// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
 				// So all the vertices will have the same normal, (0, 0, 1).
 
-				this.normals.push(0,0,this.altimetry[j][i]);
+				this.normals.push(0,0,1);
 
 				// texCoords should be computed here; uncomment and fill the blanks
-				this.texCoords.push(xCoord+0.5, -yCoord+0.5);
+				//this.texCoords.push(xCoord+0.5, -yCoord+0.5);
+				this.texCoords.push(s+ i*sInc, t+ j*tInc);
 
 				xCoord += this.patchLength;
 			}
 			yCoord -= this.patchLength;
+			s = this.minS;
 		}
-
-		console.log("Vertices coord: " + this.vertices);
 
 		// Generating indices
 		/* for nrDivs = 3 output will be
@@ -98,27 +91,7 @@ class Plane extends CGFobject{
 			}
 		}
 
-        console.log("Indices coord: " + this.indices);
-
 		this.primitiveType = this.scene.gl.TRIANGLE_STRIP;
-
-	/* Alternative with TRIANGLES instead of TRIANGLE_STRIP. More indices, but no degenerate triangles */
-	/*
-		for (var j = 0; j < this.nrDivs; j++)
-		{
-			for (var i = 0; i < this.nrDivs; i++)
-			{
-				this.indices.push(ind, ind+this.nrDivs+1, ind+1);
-				this.indices.push(ind+1, ind+this.nrDivs+1, ind+this.nrDivs+2 );
-
-				ind++;
-			}
-			ind++;
-		}
-
-		this.primitiveType = this.scene.gl.TRIANGLES;
-	*/
-
 		this.initGLBuffers();
 	};
 

@@ -1,9 +1,6 @@
 /**
- * MyObject
- * @param gl {WebGLRenderingContext}
- * @constructor
+ * Class that represents a simple square.
  */
-
 class MyQuad extends CGFobject
 {
 	constructor(scene, minS, maxS, minT, maxT)

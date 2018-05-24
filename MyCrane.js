@@ -1,15 +1,4 @@
-/**
- * Class that represents the crane and its pick-up platform.
- */
 class MyCrane extends CGFobject{
-    /**
-     * Constructor of the crane Class.
-     * @param scene - The scene of the project.
-     * @param xPos - The x coordinate
-     * @param yPos - The y coordinate
-     * @param zPos - The z coordinate
-     * @param rotation - The initial rotation
-     */
   constructor(scene, xPos, yPos, zPos, rotation){
     super(scene);
 
@@ -48,10 +37,11 @@ class MyCrane extends CGFobject{
     this.platformTexture.loadTexture('../resources/images/platform.jpg');
   }
 
-    /**
-     * Function that defines the coordinates for the vehicle to start falling.
-     * @param vehicle - The current vehicle
-     */
+  setAngles(jointAngle, baseAngle){
+    this.baseToJointUnit.setAngle(jointAngle);
+    this.baseAngle = baseAngle;
+  }
+
   releaseVehicle(vehicle){
     vehicle.setXpos(this.xPos-this.liftPlatformZpos+4);
     vehicle.setYpos(this.yPos+5);
@@ -61,11 +51,6 @@ class MyCrane extends CGFobject{
     this.displayCar=false;
   }
 
-    /**
-     * Deals with the crane animation. Implemented with a state machine with 6 states.
-     * Uses the time elapsed since the last update call.
-     * @param deltaTime - time elapsed since the last update
-     */
   update(deltaTime){
     if(deltaTime>100000)
       return;
@@ -108,11 +93,6 @@ class MyCrane extends CGFobject{
 
   }
 
-    /**
-     * Lowers the arm and its magnet towards the car.
-     * @param deltaTime - The time elapsed since the last update
-     * @param nextState - The value of the following state
-     */
   gotoMaxJointAngle(deltaTime, nextState){
     let angle = this.baseToJointUnit.getAngle()+(this.animationSpeed)*(360/60);
     if(angle<this.jointMaxAngle)
@@ -121,11 +101,6 @@ class MyCrane extends CGFobject{
       this.state = nextState;
   }
 
-    /**
-     * Raises the arm and its magnet toward the initial position.
-     * @param deltaTime - The time elapsed since the last update
-     * @param nextState - The value of the following state
-     */
   gotoMinJointAngle(deltaTime, nextState){
     let angle = this.baseToJointUnit.getAngle()-(this.animationSpeed)*(360/60);
     if(angle>this.jointMinAngle)

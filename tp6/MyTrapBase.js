@@ -1,3 +1,6 @@
+/**
+ * Class that represents the 2D trapezoid. 
+ */
 class MyTrapBase extends CGFobject{
   constructor(scene,stacks,regular)
   {
@@ -41,7 +44,7 @@ class MyTrapBase extends CGFobject{
         this.vertices.push(Math.cos(0*Math.PI/180),Math.sin(0*Math.PI/180),0);
         this.vertices.push(Math.cos(60*Math.PI/180),Math.sin(60*Math.PI/180),0);
         this.vertices.push(Math.cos(90*Math.PI/180),Math.sin(60*Math.PI/180),0);
-        //NAO DESCOBRI OUTRA MANEIRA
+
         this.indices.push(0,2,1);
         this.indices.push(0,3,2);
         this.texCoords = [
@@ -51,10 +54,6 @@ class MyTrapBase extends CGFobject{
           0, 0
         ];
       }
-
-      //console.log(this.vertices);
-
-
 
       this.primitiveType=this.scene.gl.TRIANGLES;
       this.initGLBuffers();

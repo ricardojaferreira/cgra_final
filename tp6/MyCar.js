@@ -2,13 +2,15 @@ class MyCar extends CGFobject{
   constructor(scene)
   {
     super(scene);
-    this.lamp = new MySemiSphere(scene,16,16);
+
+    this.sphere = new MySemiSphere(scene,16,16);
     this.paraChoques = new MyTrapezoid(scene,6,0);
     this.wheelSocket = new MyTrapezoid(scene,6,1);
     this.lowerPart = new MyUnitCubeQuad(scene,0,1,0,1);
     this.frontWindow = new MyTriangularPrism(scene,1,0.5,1);
-		this.rearWindow = new MyTriangularPrism(scene,1,1,1);
+    this.rearWindow = new MyTriangularPrism(scene,1,1,1);
     this.chassis = new MyChassis(scene,16,20);
+    this.circle = new MyCircle(scene,16,0,1,0,1);
 
     this.prismBaseFW = new MyTriangle(scene,0.5,1);
     this.prismBaseRW = new MyTriangle(scene,1,1);
@@ -19,37 +21,54 @@ class MyCar extends CGFobject{
     this.lampTexture = new CGFappearance(scene);
     this.lampTexture.setAmbient(0.8,0.8,0.8,1);
 		this.lampTexture.setDiffuse(0.8,0.8,0.8,1);
-		this.lampTexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
+		this.lampTexture.setSpecular(0.1,0.1,0.1,1);
 		this.lampTexture.setShininess(120);
     this.lampTexture.loadTexture('../resources/images/lamp.jpg');
 
     this.glassTexture = new CGFappearance(scene);
     this.glassTexture.setAmbient(0.8,0.8,0.8,1);
 		this.glassTexture.setDiffuse(0.8,0.8,0.8,1);
-		this.glassTexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
+		this.glassTexture.setSpecular(0.1,0.1,0.1,1);
 		this.glassTexture.setShininess(120);
     this.glassTexture.loadTexture('../resources/images/glass.png');
 
     this.roofTexture = new CGFappearance(scene);
     this.roofTexture.setAmbient(0.8,0.8,0.8,1);
 		this.roofTexture.setDiffuse(0.8,0.8,0.8,1);
-		this.roofTexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
+		this.roofTexture.setSpecular(0.1,0.1,0.1,1);
 		this.roofTexture.setShininess(120);
     this.roofTexture.loadTexture('../resources/images/redBull.jpg');
 
     this.paraChoquesTexture = new CGFappearance(scene);
     this.paraChoquesTexture.setAmbient(0.8,0.8,0.8,1);
 		this.paraChoquesTexture.setDiffuse(0.8,0.8,0.8,1);
-		this.paraChoquesTexture.setSpecular(0.1,0.1,0.1,1); //alinea 8
+		this.paraChoquesTexture.setSpecular(0.1,0.1,0.1,1);
 		this.paraChoquesTexture.setShininess(120);
     this.paraChoquesTexture.loadTexture('../resources/images/parachoque.jpg');
 
   };
-	
-  updateTexture(texture){
-    this.roofTexture = texture;
+
+    /**
+     * Changes the current vehicle textures by the selected on the dropdown menu.
+     * @param part - Name of the part that will be changed
+     * @param texture - Texture that should be changed to
+     */
+  updateTexture(part,texture){
+    if(part=="Body")
+      this.roofTexture = texture;
+    else if(part=="Windows")
+      this.glassTexture = texture;
+    else if(part=="Wheels")
+      this.chassis.updateTexture(texture);
+    else if(part=="Headlights")
+      this.lampTexture = texture;
   }
 
+    /**
+     * Informs the class that simulates the wheels about the new speed and steering angle.
+     * @param speed - The new speed
+     * @param steering - The new steering angle
+     */
   update(speed, steering){
     this.chassis.update(steering, speed);
   }
@@ -113,6 +132,34 @@ class MyCar extends CGFobject{
         this.scene.translate(0,0,1);
           this.prismBaseFW.display();
       this.scene.popMatrix();
+    this.scene.popMatrix();
+
+    //RIGHT MIRROR
+    this.scene.pushMatrix();
+      this.scene.translate(0.75,0.25,-1.5);
+      this.scene.rotate(90*Math.PI/180,0,1,0);
+      this.scene.scale(0.25, 0.25, 0.25);
+      this.roofTexture.apply();
+      this.sphere.display();
+      this.scene.pushMatrix();
+        this.scene.rotate(180*Math.PI/180,0,1,0);
+        this.glassTexture.apply();
+        this.circle.display();
+      this.scene.popMatrix();
+    this.scene.popMatrix();
+
+    //LEFT MIRROR
+    this.scene.pushMatrix();
+    this.scene.translate(0.75,0.25,1.5);
+    this.scene.rotate(90*Math.PI/180,0,1,0);
+    this.scene.scale(0.25, 0.25, 0.25);
+    this.roofTexture.apply();
+    this.sphere.display();
+    this.scene.pushMatrix();
+      this.scene.rotate(180*Math.PI/180,0,1,0);
+      this.glassTexture.apply();
+      this.circle.display();
+    this.scene.popMatrix();
     this.scene.popMatrix();
 
     //REAR WINDOW
@@ -224,7 +271,7 @@ class MyCar extends CGFobject{
       this.scene.rotate(90*Math.PI/180,0,1,0);
       this.scene.scale(0.25, 0.25, 0.25);
         this.lampTexture.apply();
-        this.lamp.display();
+        this.sphere.display();
     this.scene.popMatrix();
 
     //RIGHT LAMP
@@ -233,7 +280,7 @@ class MyCar extends CGFobject{
       this.scene.rotate(90*Math.PI/180,0,1,0);
       this.scene.scale(0.25, 0.25, 0.25);
         this.lampTexture.apply();
-        this.lamp.display();
+        this.sphere.display();
     this.scene.popMatrix();
 
     //WHEELS AND AXIS

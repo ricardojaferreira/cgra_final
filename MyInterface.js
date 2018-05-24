@@ -46,12 +46,8 @@ class MyInterface extends CGFinterface {
     //vehicle options
     var vehicle = this.gui.addFolder('Vehicle');
     vehicle.open();
-    let textures = vehicle.addFolder('Textures');
-		textures.add(this.scene, 'Body', ["redbull", "dakar"] );
-    textures.add(this.scene, 'Windows', ["glass", "magnet"] );
-    textures.add(this.scene, 'Wheels', ["wheelTexture", "pointer"] );
-    textures.add(this.scene, 'Headlights', ["lamp", "donald"] );
-
+    vehicle.add(this.scene, 'luzes');
+		vehicle.add(this.scene, 'Texture', ["redbull", "dakar"] );
 
 		// add a group of controls (and open/expand by defult)
 
@@ -63,13 +59,15 @@ class MyInterface extends CGFinterface {
 		// e.g. this.option1=true; this.option2=false;
 
     group.add(this.scene, 'showAxis');
+		group.add(this.scene, 'option1');
+		group.add(this.scene, 'option2');
 
 		// add a slider
 		// must be a numeric variable of the scene, initialized in scene.init e.g.
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-		this.speedSlider = this.gui.add(this.scene, 'speed', -0.5, 0.5).listen();
+		this.speedSlider = this.gui.add(this.scene, 'speed', -1, 1).listen();
 
 
     this.initKeys();

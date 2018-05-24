@@ -1,4 +1,14 @@
 class MyWheel extends CGFobject{
+
+    /**
+     * Constructor of the class. Creates one Wheel of the car.
+     * Uses one object of type MyCylinder to create the tyre.
+     * Uses two object of type MyCircle one to create the rim and another to create the interior.
+     * All objects have an applied texture.
+     * @param scene - The project scene
+     * @param slices - The number of slices used to create the cylinder
+     * @param stacks - The number of stacks to create the cylinder
+     */
   constructor(scene, slices, stacks)
   {
     super(scene);
@@ -31,6 +41,14 @@ class MyWheel extends CGFobject{
 		this.interiorTexture.setShininess(120);
     this.interiorTexture.loadTexture('../resources/images/metalTexture.jpg');
 
+  }
+
+    /**
+     * Updates the wheel texture using the dat.gui interface
+     * @param texture The texture to apply.
+     */
+  updateTexture(texture){
+    this.wheelTexture = texture;
   }
 
   display(){
